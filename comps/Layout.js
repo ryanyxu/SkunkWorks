@@ -1,16 +1,11 @@
-// components/MyLayout.js
+// components/Layout.js
 
 import Header from './Header';
 
-const layoutStyle = {
-  margin: 20,
-  padding: 20,
-  border: '1px solid #DDD'
-};
 
 const withLayout = Page => {
   return () => (
-    <div style={layoutStyle}>
+    <div>
       <Header />
       <Page />
     </div>

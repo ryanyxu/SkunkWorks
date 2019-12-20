@@ -1,11 +1,14 @@
 // pages/index.js
 
 import withLayout from '../comps/Layout';
-//import "../pages/index.css";
-import '../style.css';
 import {Button} from 'reactstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../style.css'; //for some reason this is needed
+import Home from '../pages/Home';
 
-const Page = () => <Button>Hello Next.js</Button>;
+const Page = () => (
+    <Home/>
+);
+    
 
-export default withLayout(Page);
+
+export default Page;

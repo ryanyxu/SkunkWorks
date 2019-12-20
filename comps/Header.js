@@ -1,17 +1,22 @@
 import Link from 'next/link';
+import '../style.css';
 
 const linkStyle = {
   marginRight: 15
 };
 
+import {Navbar} from 'reactstrap';
 const Header = () => (
-  <div>
-    <Link href="/">
-      <a style={linkStyle}>Home</a>
-    </Link>
-    <Link href="/about">
-      <a style={linkStyle}>About</a>
-    </Link>
+  <div className="navbar">
+    <Navbar>
+      <Link href="/">
+        <a style={linkStyle}>Home</a>
+      </Link>
+      <h2>SkunkWorks</h2>
+      <Link href="/about">
+        <a style={linkStyle}>About Us</a>
+      </Link>
+    </Navbar>
   </div>
 );
 

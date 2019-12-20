@@ -1,4 +1,69 @@
-h1 {
-  font-size: 50px;
-  background-color: red;
+@import
+'node_modules/bootstrap/dist/css/bootstrap.css';
+
+.intro-display {
+    background-image: url("https://www.wework.com/ideas/wp-content/uploads/sites/4/2019/06/Web_150DPI-20180324-WeWork-Carioca-Common-Areas-Couch-Area-2-1440x810.jpg");
+
+    height: 50%;
+
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.project-display {
+    width: 100%;
+    background-image: url("https://cdn8.dissolve.com/p/D985_56_092/D985_56_092_1200.jpg");
+
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.form-display {
+    width: 100%;
+    background-image: url("https://dailygazette.com/sites/default/files/styles/article_image/public/shutterstock_376933627.jpg?itok=dyAE7VSq");
+
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.jumbotron {
+    background: rgba(255, 255, 255, 0.7);
+    width: 70%;
+    margin-top: 18%;
+    margin-bottom: 20%;
+}
+
+.project {
+    margin-top: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 5%;
+    opacity: .85;
+}
+
+.header {
+    font-size: 3rem;
+    background: rgba(255, 255, 255, 0.85);
+    text-align: center;
+}
+
+.navbar {
+    background: transparent;
+}
+
+.sign-up {
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 2%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 5%;
+    background: rgba(255, 255, 255, 0.85);
 }
