@@ -6,7 +6,7 @@ import {Container, Row, Col, Jumbotron, Button,
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Form, FormGroup,
     Label, Input, FormFeedback, FormText} from 'reactstrap';
-
+import Link from 'next/link';
 import '../style.css';
 
 const Home = () => (
@@ -19,15 +19,19 @@ const Home = () => (
 
 
 const IntroDisplay = (props) => {
+    function scrollDown(props) {
+        window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+    }
     return (
         <div className="d-flex justify-content-center intro-display">
             <Jumbotron>
                 <h1 className="display-3">SkunkWorks</h1>
                 <p className="lead">Start a project.   Join a team.   Build a community.</p>
                 <hr className="my-2"/>
+                <br></br>
                 <p>Work on something you're proud of.</p>
                 <p className="lead">
-                    <Button color="primary">Join Us</Button>
+                    <Button color="primary" onClick={scrollDown}>Become a Skunkworker</Button>
                 </p>
             </Jumbotron>
         </div>
@@ -41,22 +45,22 @@ class ProjectDisplay extends React.Component {
             <div className="project-display parallax">
                 <div className="header">Current Projects</div>
                 <Row>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><Project/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><Project/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><Project/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><Project/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><Project/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><Project/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><Project/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><Project/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><Project/></Col>
+                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
+                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
+                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
+                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
+                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
+                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
+                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
+                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
+                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
                 </Row>
             </div>
         );
     }
 }
 
-function Project(props) {
+function ProjectCard(props) {
     return (
         <div>
             <Card className="project">
@@ -64,7 +68,9 @@ function Project(props) {
                 <CardBody>
                 <CardTitle>Project Title</CardTitle>
                 <CardText>Description of how amazing project is</CardText>
-                <Button>Learn More</Button>
+                <Link href="/Project">
+                    <Button onClick="">Learn More</Button>
+                </Link>
                 </CardBody>
             </Card>
         </div>
@@ -74,7 +80,7 @@ function Project(props) {
 const SignUp = (props) => {
     return (
         <div className="form-display">
-            <h1 className="header">Join Us</h1>
+            <h1 className="header">Become a SkunkWorker</h1>
             <Form className="sign-up">
                 <FormGroup>
                 <Label for="exampleText">Name</Label>
@@ -128,5 +134,5 @@ const SignUp = (props) => {
   }
 
 //export default withLayout(Home);
-export default Home;
+export default withLayout(Home);
 
