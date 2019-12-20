@@ -76,7 +76,7 @@ function TeamCard(props) {
         "https://www.brandeis.edu/computer-science/people/images/faculty/salas-pito.jpg",
         "https://www.brandeis.edu/computer-science/people/images/faculty/michael-golitsyn.jpg"
         ]
-    return <img className="icon" src={team[props.num]}></img>
+    return <Link href="/Profile"><img className="icon" src={team[props.num]}></img></Link>
 }
 
 const JoinForm = (props) => {
