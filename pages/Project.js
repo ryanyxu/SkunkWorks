@@ -60,10 +60,10 @@ function TeamDisplay(props) {
             <Container className="technology-display">
                 <h1 className="header">Our Team</h1>
                 <Row>
-                    <Col className="col-6 col-lg-3 col-md-4"><TeamCard num="0" /></Col>
-                    <Col className="col-6 col-lg-3 col-md-4"><TeamCard num="1" /></Col>
-                    <Col className="col-6 col-lg-3 col-md-4"><TeamCard num="2"/></Col>
-                    <Col className="col-6 col-lg-3 col-md-4"><TeamCard num="3" /></Col>
+                    <Col className="col-6 col-lg-3 col-md-6"><TeamCard num="0" /></Col>
+                    <Col className="col-6 col-lg-3 col-md-6"><TeamCard num="1" /></Col>
+                    <Col className="col-6 col-lg-3 col-md-6"><TeamCard num="2"/></Col>
+                    <Col className="col-6 col-lg-3 col-md-6"><TeamCard num="3" /></Col>
                 </Row>
             </Container>
         </div>
