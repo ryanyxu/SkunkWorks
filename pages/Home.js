@@ -44,57 +44,58 @@ class ProjectDisplay extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            projectIDs: [],
+            projects: [],
         }
-        this.ProjectCard = this.ProjectCard.bind();
     }
     componentDidMount() {
-        //fill projectIDs
         Axios.get('http://localhost:5000/projects/')
             .then(response => {
-                response.data.
                 this.setState({
-                    projectIDs: response.data.map(project => project.id)
-                })
+                    projects: response.data.map(project => new Object({
+                        id: project._id.toString(),
+                        name: project.projectname,
+                        description: project.shortdescription,
+                    }))
+                });
             }
         );
     }
 
-    ProjectCard(props) {
-        return (
-            <div>
-                <Card className="project">
-                    <CardImg top width="100%" src="https://cities4people.eu/wp-content/uploads/2017/11/cities4people-logo-plain-2-1024x972.jpg" alt="Card image cap" />
-                    <CardBody>
-                    <CardTitle>Project Title</CardTitle>
-                    <CardText>Description of how amazing project is</CardText>
-                    <Link href="/Project">
-                        <Button onClick="">Learn More</Button>
-                    </Link>
-                    </CardBody>
-                </Card>
-            </div>
-        );
-    }
-
     render() {
+        var projectCards = [];
+
+        this.state.projects.forEach(project => {
+            projectCards.push(
+            <Col className="col-12 col-lg-4 col-md-6">
+                <ProjectCard name={project.name} description={project.description}/>
+            </Col>);
+        });
+
         return (
             <div className="project-display parallax">
                 <div className="header">Current Projects</div>
                 <Row>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6 col-sm-12 col-xs-12"><ProjectCard/></Col>
+                    {projectCards}
                 </Row>
             </div>
         );
     }
+}
+function ProjectCard(props) {
+    return (
+        <div>
+            <Card className="project">
+                <CardImg top width="100%" src="https://cities4people.eu/wp-content/uploads/2017/11/cities4people-logo-plain-2-1024x972.jpg" alt="Card image cap" />
+                <CardBody>
+                <CardTitle>{props.name}</CardTitle>
+                <CardText>{props.description}</CardText>
+                <Link href="/Project">
+                    <Button onClick="">Learn More</Button>
+                </Link>
+                </CardBody>
+            </Card>
+        </div>
+    );
 }
 
 const SignUp = (props) => {
