@@ -8,6 +8,7 @@ import {Container, Row, Col, Jumbotron, Button,
     Label, Input, FormFeedback, FormText} from 'reactstrap';
 import Link from 'next/link';
 import '../style.css';
+import Axios from 'axios';
 
 const Home = () => (
     <div>
@@ -40,6 +41,42 @@ const IntroDisplay = (props) => {
   
 
 class ProjectDisplay extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            projectIDs: [],
+        }
+        this.ProjectCard = this.ProjectCard.bind();
+    }
+    componentDidMount() {
+        //fill projectIDs
+        Axios.get('http://localhost:5000/projects/')
+            .then(response => {
+                response.data.
+                this.setState({
+                    projectIDs: response.data.map(project => project.id)
+                })
+            }
+        );
+    }
+
+    ProjectCard(props) {
+        return (
+            <div>
+                <Card className="project">
+                    <CardImg top width="100%" src="https://cities4people.eu/wp-content/uploads/2017/11/cities4people-logo-plain-2-1024x972.jpg" alt="Card image cap" />
+                    <CardBody>
+                    <CardTitle>Project Title</CardTitle>
+                    <CardText>Description of how amazing project is</CardText>
+                    <Link href="/Project">
+                        <Button onClick="">Learn More</Button>
+                    </Link>
+                    </CardBody>
+                </Card>
+            </div>
+        );
+    }
+
     render() {
         return (
             <div className="project-display parallax">
@@ -58,23 +95,6 @@ class ProjectDisplay extends React.Component {
             </div>
         );
     }
-}
-
-function ProjectCard(props) {
-    return (
-        <div>
-            <Card className="project">
-                <CardImg top width="100%" src="https://cities4people.eu/wp-content/uploads/2017/11/cities4people-logo-plain-2-1024x972.jpg" alt="Card image cap" />
-                <CardBody>
-                <CardTitle>Project Title</CardTitle>
-                <CardText>Description of how amazing project is</CardText>
-                <Link href="/Project">
-                    <Button onClick="">Learn More</Button>
-                </Link>
-                </CardBody>
-            </Card>
-        </div>
-    );
 }
 
 const SignUp = (props) => {
