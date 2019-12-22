@@ -12,8 +12,8 @@ router.route('/add').post((req, res) => {
     const shortdescription = req.body.shortdescription;
     const longdescription = req.body.longdescription;
     const duration = req.body.longdescription;
-    const technologies = Array(req.body.technologies);
-    const members = Array(req.body.members);
+    const technologies = req.body.technologies;
+    const members = req.body.members;
 
     const newProject = new Project({
         projectname,
@@ -49,8 +49,8 @@ router.route('/update/:id').post((req, res) => {
             project.shortdescription = req.body.shortdescription;
             project.longdescription = req.body.longdescription;
             project.duration = req.body.longdescription;
-            project.technologies = Array(req.body.technologies);
-            project.members = Array(req.body.members);
+            project.technologies = req.body.technologies;
+            project.members = req.body.members;
 
             project.save()
                 .then(() => res.json('Project updated!'))

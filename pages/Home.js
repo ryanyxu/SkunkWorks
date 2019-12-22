@@ -55,6 +55,7 @@ class ProjectDisplay extends React.Component {
                         id: project._id.toString(),
                         name: project.projectname,
                         description: project.shortdescription,
+                        image: project.image
                     }))
                 });
             }
@@ -67,10 +68,9 @@ class ProjectDisplay extends React.Component {
         this.state.projects.forEach(project => {
             projectCards.push(
             <Col className="col-12 col-lg-4 col-md-6">
-                <ProjectCard name={project.name} description={project.description}/>
+                <ProjectCard project={project}/>
             </Col>);
         });
-
         return (
             <div className="project-display parallax">
                 <div className="header">Current Projects</div>
@@ -81,15 +81,17 @@ class ProjectDisplay extends React.Component {
         );
     }
 }
+
 function ProjectCard(props) {
+    console.log(props.project.image);
     return (
         <div>
             <Card className="project">
-                <CardImg top width="100%" src="https://cities4people.eu/wp-content/uploads/2017/11/cities4people-logo-plain-2-1024x972.jpg" alt="Card image cap" />
+                <CardImg top width="100%" src={props.project.image} />
                 <CardBody>
-                <CardTitle>{props.name}</CardTitle>
-                <CardText>{props.description}</CardText>
-                <Link href="/Project">
+                <CardTitle>{props.project.name}</CardTitle>
+                <CardText>{props.project.description}</CardText>
+                <Link href={'/Project?id=' + props.project.id}>
                     <Button onClick="">Learn More</Button>
                 </Link>
                 </CardBody>
@@ -152,7 +154,7 @@ const SignUp = (props) => {
             </Form>
         </div>
     );
-  }
+}
 
 //export default withLayout(Home);
 export default withLayout(Home);

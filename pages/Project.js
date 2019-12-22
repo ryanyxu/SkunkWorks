@@ -7,29 +7,51 @@ import {Container, Row, Col, Jumbotron, Button,
     CardTitle, CardSubtitle, Form, FormGroup,
     Label, Input, FormFeedback, FormText} from 'reactstrap';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {useRouter} from 'next/router';
+import Axios from 'axios';
 
-const Project = () => (
-    <>
-        <ProjectIntro/>
-        <TechnologyDisplay/>
-        <TeamDisplay/>
-        <JoinForm/>
-    </>
-);
+function Project() {
+    const router = useRouter();
+    const [name, setName] = useState("");
+    const [shortDescription, setShortDescription] = useState("");
+    const [longDescription, setLongDescription] = useState("");
+    const [technologies, setTechnologies] = useState([]);
+    const [members, setMembers] = useState([]);
 
+    useEffect(() => {
+        Axios.get('http://localhost:5000/projects/' + router.query.id)
+            .then(project => {
+                setName(project.data.projectname);
+                setShortDescription(project.data.shortdescription);
+                setLongDescription(project.data.longdescription);
+                setTechnologies(project.data.technologies);
+                setMembers(project.data.members);
+            });
+    });
+    
+    return (
+        <>
+            <ProjectIntro name={name} shortDescription={shortDescription}/>
+            <TechnologyDisplay technologies={technologies}/>
+            <TeamDisplay members={members}/>
+            <JoinForm/>
+        </>
+    );
+}
 
 const ProjectIntro = (props) => {
     return (
         <div className="d-flex justify-content-center intro-display">
             <Jumbotron>
-                <h1 className="display-3">Project Name</h1>
-                <p className="lead">Short Description of Project</p>
+                <h1 className="display-3">{props.name}</h1>
+                <p className="lead">{props.shortDescription}</p>
             </Jumbotron>
         </div>
     );
 };
 
+//TODO fix technolgoydisplay
 function TechnologyDisplay(props) {
     return (
         <div className="project-display">
@@ -54,6 +76,7 @@ function TechnologyCard(props) {
     return <img className="icon" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"></img>
 }
 
+//TODO fix profile
 function TeamDisplay(props) {
     return (
         <div className="project-display">
