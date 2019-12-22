@@ -1,6 +1,7 @@
 // components/Layout.js
 
 import Header from './Header';
+import Footer from './Footer'
 
 
 const withLayout = Page => {
@@ -8,6 +9,7 @@ const withLayout = Page => {
     <div>
       <Header />
       <Page />
+      <Footer/>
     </div>
   );
 };

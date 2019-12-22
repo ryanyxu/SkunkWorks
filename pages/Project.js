@@ -25,11 +25,27 @@ function Project() {
                 setName(project.data.projectname);
                 setShortDescription(project.data.shortdescription);
                 setLongDescription(project.data.longdescription);
-                setTechnologies(project.data.technologies);
-                setTeam(project.data.members); //change back to team later
+                const setTech = (t) => { //put somewhere else later
+                    var arr = [];
+                    t.forEach(tech => {
+                        var techName = tech.technology;
+                        var techImage = tech.image;
+                        arr.push(new Object({name: techName, image: techImage}));
+                    })
+                    console.log("length" + arr.length);
+                    return arr;
+                }
+                setTechnologies(setTech(project.data.technologies));
             });
     }, []); //second param makes useffect only run once (safari stopped freezing!!)
-    
+    console.log(technologies.length);
+    return (
+        <>
+            <ProjectIntro name={name} shortDescription={shortDescription}/>
+            <TechnologyDisplay technologies={technologies}/>
+        </>
+    );
+    /*
     return (
         <>
             <ProjectIntro name={name} shortDescription={shortDescription}/>
@@ -38,6 +54,7 @@ function Project() {
             <JoinForm/>
         </>
     );
+    */
 }
 
 const ProjectIntro = (props) => {
@@ -54,7 +71,6 @@ const ProjectIntro = (props) => {
 //TODO fix technolgoydisplay
 function TechnologyDisplay(props) {
     var technologyCards = [];
-
     props.technologies.forEach(technology => {
         technologyCards.push(
             <Col className="col-6 col-lg-3 col-md-4"><TechnologyCard tech={technology}/></Col>
@@ -77,8 +93,8 @@ function TechnologyDisplay(props) {
 //can possibly reuse code in tech, team, and project display and pass classname as parameters for styling
 function TechnologyCard(props) {
     return <Container>
-        <img className="icon" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"/>
-        <h4>{props.tech}</h4>
+        <img className="icon" src={props.tech.image}/>
+        <h4>{props.tech.name}</h4>
     </Container>
 }
 

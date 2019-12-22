@@ -8,14 +8,18 @@ import {Container, Row, Col, Jumbotron, Button,
     Label, Input, FormFeedback, FormText} from 'reactstrap';
 
 import React, { useState } from 'react';
+import {useRouter} from 'next/router';
+import Axios from 'axios';
 
-const Profile = () => (
-    <>
-        <ProfileIntro/>
-        <ProjectInvolvement/>
-        <Contact/>
-    </>
-);
+function Profile() {
+    return(
+        <>
+            <ProfileIntro/>
+            <ProjectInvolvement/>
+            <Contact/>
+        </>
+    );
+};
 
 
 const ProfileIntro = (props) => {

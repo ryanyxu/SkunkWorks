@@ -10,6 +10,12 @@ import Link from 'next/link';
 import '../style.css';
 import Axios from 'axios';
 
+
+/**
+ * TODO in future:
+ * 
+ * make project and usernames unique so that urls look prettier
+ */
 const Home = () => (
     <div>
         <IntroDisplay/>
@@ -51,7 +57,7 @@ class ProjectDisplay extends React.Component {
         Axios.get('http://localhost:5000/projects/')
             .then(response => {
                 this.setState({
-                    projects: response.data.map(project => new Object({
+                    projects: response.data.map(project => new Object({ //possibly make project object later
                         id: project._id.toString(),
                         name: project.projectname,
                         description: project.shortdescription,

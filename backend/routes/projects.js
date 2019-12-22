@@ -14,6 +14,7 @@ router.route('/add').post((req, res) => {
     const duration = req.body.longdescription;
     const technologies = req.body.technologies;
     const members = req.body.members;
+    const image = req.body.image;
 
     const newProject = new Project({
         projectname,
@@ -22,6 +23,7 @@ router.route('/add').post((req, res) => {
         duration,
         technologies,
         members,
+        image,
     });
 
     newProject.save()
@@ -51,6 +53,7 @@ router.route('/update/:id').post((req, res) => {
             project.duration = req.body.longdescription;
             project.technologies = req.body.technologies;
             project.members = req.body.members;
+            project.image = req.body.image;
 
             project.save()
                 .then(() => res.json('Project updated!'))

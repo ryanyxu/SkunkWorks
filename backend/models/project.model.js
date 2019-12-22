@@ -1,6 +1,24 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
+const technologySchema = new Schema({
+    technology: {
+        type: String,
+    },
+    image: {
+        type: String,
+    },
+});
+
+const memberSchema = new Schema({
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
+    image: {
+        type: String,
+    }
+});
 
 const projectSchema = new Schema({
     projectname: {
@@ -15,18 +33,20 @@ const projectSchema = new Schema({
         trim: true,
         maxlength: 100,
     },
-    technologies: {
-        type: Array,
-        required: true,
-    },
-    members: {
-        type: Array,
-        required: true,
-    },
     longdescription: {
         type: String,
         required: true,
     },
+    technologies: {
+        type: [technologySchema],
+        required: true,
+    },
+    members: {
+        type: [memberSchema],
+    },
+    image: {
+        type: String,
+    }
 },{
     timestamps: true,
 });
