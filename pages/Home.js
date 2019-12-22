@@ -83,7 +83,6 @@ class ProjectDisplay extends React.Component {
 }
 
 function ProjectCard(props) {
-    console.log(props.project.image);
     return (
         <div>
             <Card className="project">

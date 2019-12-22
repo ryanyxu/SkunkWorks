@@ -17,7 +17,7 @@ function Project() {
     const [shortDescription, setShortDescription] = useState("");
     const [longDescription, setLongDescription] = useState("");
     const [technologies, setTechnologies] = useState([]);
-    const [members, setMembers] = useState([]);
+    const [team, setTeam] = useState([]);
 
     useEffect(() => {
         Axios.get('http://localhost:5000/projects/' + router.query.id)
@@ -26,15 +26,15 @@ function Project() {
                 setShortDescription(project.data.shortdescription);
                 setLongDescription(project.data.longdescription);
                 setTechnologies(project.data.technologies);
-                setMembers(project.data.members);
+                setTeam(project.data.members); //change back to team later
             });
-    });
+    }, []); //second param makes useffect only run once (safari stopped freezing!!)
     
     return (
         <>
             <ProjectIntro name={name} shortDescription={shortDescription}/>
             <TechnologyDisplay technologies={technologies}/>
-            <TeamDisplay members={members}/>
+            <TeamDisplay team={team}/>
             <JoinForm/>
         </>
     );
@@ -53,40 +53,51 @@ const ProjectIntro = (props) => {
 
 //TODO fix technolgoydisplay
 function TechnologyDisplay(props) {
+    var technologyCards = [];
+
+    props.technologies.forEach(technology => {
+        technologyCards.push(
+            <Col className="col-6 col-lg-3 col-md-4"><TechnologyCard tech={technology}/></Col>
+        );
+    });
+
     return (
         <div className="project-display">
             <Container className="technology-display">
                 <h1 className="header">Technologies Used</h1>
                 <Row>
-                    <Col className="col-6 col-lg-3 col-md-4"><TechnologyCard/></Col>
-                    <Col className="col-6 col-lg-3 col-md-4"><TechnologyCard/></Col>
-                    <Col className="col-6 col-lg-3 col-md-4"><TechnologyCard/></Col>
-                    <Col className="col-6 col-lg-3 col-md-4"><TechnologyCard/></Col>
-                    <Col className="col-6 col-lg-3 col-md-4"><TechnologyCard/></Col>
-                    <Col className="col-6 col-lg-3 col-md-4"><TechnologyCard/></Col>
-                    <Col className="col-6 col-lg-3 col-md-4"><TechnologyCard/></Col>
-                    <Col className="col-6 col-lg-3 col-md-4"><TechnologyCard/></Col>
+                    {technologyCards}
                 </Row>
             </Container>
         </div>
     );
 }
 
+//in the future will want a large database of icons for every possible framework/technology
+//can possibly reuse code in tech, team, and project display and pass classname as parameters for styling
 function TechnologyCard(props) {
-    return <img className="icon" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"></img>
+    return <Container>
+        <img className="icon" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"/>
+        <h4>{props.tech}</h4>
+    </Container>
 }
 
 //TODO fix profile
 function TeamDisplay(props) {
+    var teamCards = [];
+
+    props.team.forEach(member => {
+        teamCards.push(
+            <Col className="col-6 col-lg-3 col-md-4"><TeamCard member={member}/></Col>
+        );
+    });
+
     return (
         <div className="project-display">
             <Container className="technology-display">
                 <h1 className="header">Our Team</h1>
                 <Row>
-                    <Col className="col-6 col-lg-3 col-md-6"><TeamCard num="0" /></Col>
-                    <Col className="col-6 col-lg-3 col-md-6"><TeamCard num="1" /></Col>
-                    <Col className="col-6 col-lg-3 col-md-6"><TeamCard num="2"/></Col>
-                    <Col className="col-6 col-lg-3 col-md-6"><TeamCard num="3" /></Col>
+                    {teamCards}
                 </Row>
             </Container>
         </div>
@@ -99,7 +110,11 @@ function TeamCard(props) {
         "https://www.brandeis.edu/computer-science/people/images/faculty/salas-pito.jpg",
         "https://www.brandeis.edu/computer-science/people/images/faculty/michael-golitsyn.jpg"
         ]
-    return <Link href="/Profile"><img className="icon" src={team[props.num]}></img></Link>
+        //change 1 to something else later obviously
+    return <div>
+            <Link href="/Profile"><img className="icon" src={team[1]}></img></Link>
+            <h4>{props.member}</h4>
+        </div>
 }
 
 const JoinForm = (props) => {
