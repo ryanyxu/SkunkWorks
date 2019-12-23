@@ -104,7 +104,6 @@ const Contact = (props) => {
                 <Input
                     type="email"
                     name="email"
-                    id="exampleEmail"
                 />
                 </FormGroup>
                 <FormGroup>
@@ -112,7 +111,6 @@ const Contact = (props) => {
                 <Input
                     type="email"
                     name="email"
-                    id="exampleEmail"
                 />
                 </FormGroup>
                 <FormGroup>

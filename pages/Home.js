@@ -1,7 +1,7 @@
 // pages/index.js
 
 import withLayout from '../comps/Layout';
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import {Container, Row, Col, Jumbotron, Button,
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Form, FormGroup,
@@ -9,7 +9,6 @@ import {Container, Row, Col, Jumbotron, Button,
 import Link from 'next/link';
 import '../style.css';
 import Axios from 'axios';
-
 
 /**
  * TODO in future:
@@ -44,8 +43,48 @@ const IntroDisplay = (props) => {
         </div>
     );
 };
-  
 
+const ProjectDisplay = () => {
+    const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+        if (projects.length == 0) {
+            getProjects();
+        }
+    });
+
+    const getProjects = async () => {
+        let project = await Axios.get('http://localhost:5000/projects/')
+            .then(response => {
+                return response.data.map(project => new Object({ //possibly make project object later
+                        id: project._id.toString(),
+                        name: project.projectname,
+                        description: project.shortdescription,
+                        image: project.image
+                    }));
+                });
+        setProjects(project);
+    };
+
+    var projectCards = [];
+    projects.forEach(project => {
+        projectCards.push(
+        <Col className="col-12 col-lg-4 col-md-6">
+            <ProjectCard project={project}/>
+        </Col>);
+    });
+
+    return (
+        <div className="project-display parallax">
+                <div className="header">Current Projects</div>
+                <Row>
+                    {projectCards}
+                </Row>
+            </div>
+    );
+}
+  
+/*
 class ProjectDisplay extends React.Component {
     constructor(props) {
         super(props);
@@ -54,18 +93,7 @@ class ProjectDisplay extends React.Component {
         }
     }
     componentDidMount() {
-        Axios.get('http://localhost:5000/projects/')
-            .then(response => {
-                this.setState({
-                    projects: response.data.map(project => new Object({ //possibly make project object later
-                        id: project._id.toString(),
-                        name: project.projectname,
-                        description: project.shortdescription,
-                        image: project.image
-                    }))
-                });
-            }
-        );
+        
     }
 
     render() {
@@ -87,6 +115,7 @@ class ProjectDisplay extends React.Component {
         );
     }
 }
+*/
 
 function ProjectCard(props) {
     return (
@@ -113,9 +142,8 @@ const SignUp = (props) => {
                 <FormGroup>
                 <Label for="exampleText">Name</Label>
                 <Input
-                    type="email"
-                    name="email"
-                    id="exampleEmail"
+                    type="text"
+                    name="text"
                 />
                 </FormGroup>
                 <FormGroup>
@@ -123,12 +151,11 @@ const SignUp = (props) => {
                 <Input
                     type="email"
                     name="email"
-                    id="exampleEmail"
                 />
                 </FormGroup>
                 <FormGroup>
                 <Label for="exampleSelect">Interested in:</Label>
-                <Input type="select" name="select" id="exampleSelect">
+                <Input type="select" name="select">
                     <option></option>
                     <option>Creating a project</option>
                     <option>Joining a project</option>
@@ -137,7 +164,7 @@ const SignUp = (props) => {
                 </FormGroup>
                 <FormGroup>
                 <Label for="exampleSelect">Role</Label>
-                <Input type="select" name="select" id="exampleSelect">
+                <Input type="select" name="select">
                     <option></option>
                     <option>Project Manager</option>
                     <option>Developer</option>
