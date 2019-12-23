@@ -130,14 +130,13 @@ function TeamDisplay(props) {
     );
 }
 
+
 function TeamCard(props) {
         //change 1 to something else later obviously
         //TOEJTEJKRL change href to have id
         //*******read this */
-    console.log(props.member.image);
-    console.log(props.member.firstname);
     return <div>
-            <Link href="/Profile"><img className="icon" src={props.member.image}></img></Link>
+            <Link href={"/Profile?id=" + props.member.id}><img className="icon" src={props.member.image}></img></Link>
             <h4>{props.member.firstname + " " + props.member.lastname}</h4>
         </div>
 }

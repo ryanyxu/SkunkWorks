@@ -12,6 +12,9 @@ const profileProjectSchema = new Schema({
     },
     contribution: {
         type: String,
+    },
+    projectname: {
+        type: String,
     }
 });
 

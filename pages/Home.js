@@ -97,7 +97,7 @@ function ProjectCard(props) {
                 <CardTitle>{props.project.name}</CardTitle>
                 <CardText>{props.project.description}</CardText>
                 <Link href={'/Project?id=' + props.project.id}>
-                    <Button onClick="">Learn More</Button>
+                    <Button>Learn More</Button>
                 </Link>
                 </CardBody>
             </Card>
