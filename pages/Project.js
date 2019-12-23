@@ -32,20 +32,20 @@ function Project() {
                         var techImage = tech.image;
                         arr.push(new Object({name: techName, image: techImage}));
                     })
-                    console.log("length" + arr.length);
                     return arr;
                 }
                 setTechnologies(setTech(project.data.technologies));
+                const setMembers = (t) => {
+                    var arr = [];
+                    t.forEach(member => {
+                        arr.push(member._id);
+                    })
+                    return arr;
+                }
+                setTeam(setMembers(project.data.members));
             });
     }, []); //second param makes useffect only run once (safari stopped freezing!!)
-    console.log(technologies.length);
-    return (
-        <>
-            <ProjectIntro name={name} shortDescription={shortDescription}/>
-            <TechnologyDisplay technologies={technologies}/>
-        </>
-    );
-    /*
+
     return (
         <>
             <ProjectIntro name={name} shortDescription={shortDescription}/>
@@ -54,7 +54,6 @@ function Project() {
             <JoinForm/>
         </>
     );
-    */
 }
 
 const ProjectIntro = (props) => {
@@ -100,13 +99,24 @@ function TechnologyCard(props) {
 
 //TODO fix profile
 function TeamDisplay(props) {
-    var teamCards = [];
-
-    props.team.forEach(member => {
-        teamCards.push(
-            <Col className="col-6 col-lg-3 col-md-4"><TeamCard member={member}/></Col>
-        );
-    });
+    const [teamCards, setTeamCards] = useState([]);
+    useEffect(() => {
+        props.team.forEach(id => {
+            Axios.get('http://localhost:5000/profiles/' + id)
+                .then(profile => { //profile from id
+                    const newTeamCard = () => {
+                        var member = {
+                            id: id,
+                            firstname: profile.data.firstname,
+                            lastname: profile.data.lastname,
+                            image: profile.data.image,
+                        };
+                        return <Col className="col-6 col-lg-3 col-md-4"><TeamCard member={member}/></Col>;
+                    }
+                    setTeamCards([newTeamCard(), ...teamCards]);
+                });
+        });
+    }, [teamCards.length == props.team.length]);
 
     return (
         <div className="project-display">
@@ -121,15 +131,14 @@ function TeamDisplay(props) {
 }
 
 function TeamCard(props) {
-    var team = ["https://www.brandeis.edu/computer-science/people/images/faculty/antonella-dilillo.jpg",
-        "https://www.brandeis.edu/computer-science/people/images/faculty/hickey-tim.jpg",
-        "https://www.brandeis.edu/computer-science/people/images/faculty/salas-pito.jpg",
-        "https://www.brandeis.edu/computer-science/people/images/faculty/michael-golitsyn.jpg"
-        ]
         //change 1 to something else later obviously
+        //TOEJTEJKRL change href to have id
+        //*******read this */
+    console.log(props.member.image);
+    console.log(props.member.firstname);
     return <div>
-            <Link href="/Profile"><img className="icon" src={team[1]}></img></Link>
-            <h4>{props.member}</h4>
+            <Link href="/Profile"><img className="icon" src={props.member.image}></img></Link>
+            <h4>{props.member.firstname + " " + props.member.lastname}</h4>
         </div>
 }
 

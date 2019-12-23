@@ -15,9 +15,6 @@ const memberSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     },
-    image: {
-        type: String,
-    }
 });
 
 const projectSchema = new Schema({

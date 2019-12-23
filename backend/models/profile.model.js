@@ -35,6 +35,9 @@ const profileSchema = new Schema({
     projects: {
         type: [profileProjectSchema],
     },
+    image: {
+        type: String,
+    }
 },{
     timestamps: true,
 });

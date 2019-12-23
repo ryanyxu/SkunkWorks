@@ -12,12 +12,14 @@ router.route('/add').post((req, res) => {
     const lastname = req.body.lastname;
     const email = req.body.email;
     const projects = req.body.projects;
+    const image = req.body.image;
 
     const newProfile = new Profile({
         firstname,
         lastname,
         email,
         projects,
+        image,
     });
 
     newProfile.save()
@@ -45,6 +47,7 @@ router.route('/update/:id').post((req, res) => {
             profile.lastname = req.body.lastname;
             profile.email = req.body.email;
             profile.projects = req.body.projects;
+            profile.image = req.body.image;
 
             profile.save()
                 .then(() => res.json('Profile updated!'))
