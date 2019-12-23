@@ -11,36 +11,50 @@ import React, { useState, useEffect } from 'react';
 import {useRouter} from 'next/router';
 import Axios from 'axios';
 
-function Profile() {
+//profile page for a member
+const Profile = () => {
     const router = useRouter();
-    const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
-    const [email, setEmail] = useState();
-    const [projects, setProjects] = useState([]);
-    const [image, setImage] = useState();
-    const [about, setAbout] = useState(); //implement later
+    const [profile, setProfile] = useState(null);
 
     useEffect(() => {
-        Axios.get('http://localhost:5000/profiles/' + router.query.id)
+        if (!profile) {
+            getProfile();
+        }
+    }, [profile]);
+
+    const getProfile = async () => {
+        let res = await Axios.get('http://localhost:5000/profiles/' + router.query.id)
             .then(profile => {
-                setFirstName(profile.data.firstname);
-                setLastName(profile.data.lastname);
-                setEmail(profile.data.email);
-                setProjects(profile.data.projects);
-                setImage(profile.data.image);
+                let obj = {
+                    name: profile.data.firstname + " " + profile.data.lastname,
+                    email: profile.data.email,
+                    projects: profile.data.projects,
+                    image: profile.data.image,
+                }
+                return obj;
             });
-    }, [projects == undefined]);
+        setProfile(res);
+    }
 
     return (
         <>
-            <ProfileIntro image={image} name={firstName + " " + lastName} email={email} about={about}/>
-            <ProjectInvolvement projects={projects}/>
-            <Contact/>
+            {
+                !profile ? <div>profile not found</div> :
+                <>
+                    <ProfileIntro image={profile.image} 
+                        name={profile.name}
+                        email={profile.email}
+                        about={profile.about}
+                    />
+                    <ProjectInvolvement projects={profile.projects}/>
+                    <Contact/>
+                </>
+            }
         </>
     );
 }
 
-
+//displays basic profile info
 const ProfileIntro = (props) => {
     return (
         <Row className="profile-intro">
@@ -56,6 +70,8 @@ const ProfileIntro = (props) => {
     );
 };
 
+//displays project involvement
+//possibly move image data away from profile on database and change to include useEffect and read from server
 function ProjectInvolvement(props) {
     function ProjectCard(props) {
         return (
@@ -75,10 +91,10 @@ function ProjectInvolvement(props) {
         );
     }
 
-    var projectList = [];
+    var projectCards = [];
     props.projects.forEach(project => {
-        projectList.push(
-        <Col className="col-12 col-lg-6 col-md-6"><ProjectCard project={project}/></Col>
+        projectCards.push(
+            <Col className="col-12 col-lg-6 col-md-6"><ProjectCard project={project}/></Col>
         );
     });
 
@@ -87,13 +103,14 @@ function ProjectInvolvement(props) {
             <Container className="technology-display">
                 <h1 className="header">Projects</h1>
                 <Row>
-                    {projectList}
+                    {projectCards}
                 </Row>
             </Container>
         </div>
     );
 }
 
+//contact form
 const Contact = (props) => {
     return (
         <div className="form-display">

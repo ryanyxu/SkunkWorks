@@ -12,9 +12,10 @@ import Axios from 'axios';
 
 /**
  * TODO in future:
- * 
  * make project and usernames unique so that urls look prettier
  */
+
+ //displays home page
 const Home = () => (
     <div>
         <IntroDisplay/>
@@ -23,7 +24,7 @@ const Home = () => (
     </div>
 );
 
-
+//displays intro screen with jumbotron and description
 const IntroDisplay = (props) => {
     function scrollDown(props) {
         window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
@@ -44,6 +45,7 @@ const IntroDisplay = (props) => {
     );
 };
 
+//gets projects from db and displays them
 const ProjectDisplay = () => {
     const [projects, setProjects] = useState([]);
 
@@ -53,87 +55,58 @@ const ProjectDisplay = () => {
         }
     });
 
+    //retrieve projects from server
     const getProjects = async () => {
-        let project = await Axios.get('http://localhost:5000/projects/')
+        setProjects(
+            await Axios.get('http://localhost:5000/projects/')
             .then(response => {
                 return response.data.map(project => new Object({ //possibly make project object later
                         id: project._id.toString(),
                         name: project.projectname,
                         description: project.shortdescription,
                         image: project.image
-                    }));
-                });
-        setProjects(project);
+                    })
+                );
+            })
+        )
     };
 
-    var projectCards = [];
-    projects.forEach(project => {
-        projectCards.push(
-        <Col className="col-12 col-lg-4 col-md-6">
-            <ProjectCard project={project}/>
-        </Col>);
-    });
-
-    return (
-        <div className="project-display parallax">
-                <div className="header">Current Projects</div>
-                <Row>
-                    {projectCards}
-                </Row>
-            </div>
-    );
-}
-  
-/*
-class ProjectDisplay extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            projects: [],
-        }
-    }
-    componentDidMount() {
-        
-    }
-
-    render() {
-        var projectCards = [];
-
-        this.state.projects.forEach(project => {
-            projectCards.push(
-            <Col className="col-12 col-lg-4 col-md-6">
-                <ProjectCard project={project}/>
-            </Col>);
-        });
+    //renders individual project card
+    const ProjectCard = (props) => {
         return (
-            <div className="project-display parallax">
-                <div className="header">Current Projects</div>
-                <Row>
-                    {projectCards}
-                </Row>
+            <div>
+                <Card className="project">
+                    <CardImg top width="100%" src={props.project.image} />
+                    <CardBody>
+                    <CardTitle>{props.project.name}</CardTitle>
+                    <CardText>{props.project.description}</CardText>
+                    <Link href={'/Project?id=' + props.project.id}>
+                        <Button>Learn More</Button>
+                    </Link>
+                    </CardBody>
+                </Card>
             </div>
         );
     }
-}
-*/
 
-function ProjectCard(props) {
     return (
-        <div>
-            <Card className="project">
-                <CardImg top width="100%" src={props.project.image} />
-                <CardBody>
-                <CardTitle>{props.project.name}</CardTitle>
-                <CardText>{props.project.description}</CardText>
-                <Link href={'/Project?id=' + props.project.id}>
-                    <Button>Learn More</Button>
-                </Link>
-                </CardBody>
-            </Card>
+        <div className="project-display parallax">
+            <div className="header">Current Projects</div>
+            <Row>
+                {
+                    !projects ? <></> :
+                    projects.map(project => {
+                        return(<Col className="col-12 col-lg-4 col-md-6">
+                            <ProjectCard project={project}/>
+                        </Col>);
+                    })
+                }
+            </Row>
         </div>
     );
 }
 
+//sign up form
 const SignUp = (props) => {
     return (
         <div className="form-display">
@@ -188,6 +161,5 @@ const SignUp = (props) => {
     );
 }
 
-//export default withLayout(Home);
 export default withLayout(Home);
 

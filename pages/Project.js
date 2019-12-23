@@ -11,7 +11,10 @@ import React, { useState, useEffect } from 'react';
 import {useRouter} from 'next/router';
 import Axios from 'axios';
 
+//displays individual project
 function Project() {
+    const router = useRouter();
+
     const [project, setProject] = useState({
         name: "",
         shortDescription: "",
@@ -20,17 +23,17 @@ function Project() {
         members: [],
     });
 
-    const router = useRouter();
-
+    //calls getProject when project is not retrieved from server
     useEffect(() => {
         if (!project.name) {
             getProject();
         }
     }, [project]);
 
+    //get project from server
     const getProject = async () => {
-
-        let proj = await Axios.get('http://localhost:5000/projects/' + router.query.id)
+        setProject(
+            await Axios.get('http://localhost:5000/projects/' + router.query.id)
             .then(project => {
                 return {
                     name: project.data.projectname,
@@ -43,9 +46,9 @@ function Project() {
                     }),
                     members: project.data.members.map(member => member._id),
                 };
-            });
-        setProject(proj);
-    }
+            })
+        );
+    };
 
     return (
         <>
@@ -61,6 +64,7 @@ function Project() {
     );
 }
 
+//displays project name and short description
 const ProjectIntro = (props) => {
     return (
         <div className="d-flex justify-content-center intro-display">
@@ -72,6 +76,7 @@ const ProjectIntro = (props) => {
     );
 };
 
+//displays technologies used
 function TechnologyDisplay(props) {
     var technologyCards = [];
     props.technologies.forEach(technology => {
@@ -92,6 +97,7 @@ function TechnologyDisplay(props) {
     );
 }
 
+//renders individual technology card
 //in the future will want a large database of icons for every possible framework/technology
 //can possibly reuse code in tech, team, and project display and pass classname as parameters for styling
 function TechnologyCard(props) {
@@ -101,18 +107,21 @@ function TechnologyCard(props) {
     </Container>
 }
 
+//displays project team
 function TeamDisplay(props) {
     var idArr = props.team;
     const [members, setMembers] = useState([]);
 
+    //call getTeam if team is empty
     useEffect(() => {
-        if (idArr.length == members.length) { //||members[0]
+        if (idArr.length > 0) { 
             getTeam();
         }
     }, [idArr]);
 
+    //get team from server
     const getTeam = async () => {
-        var arr = [0,0,0];
+        let arr = [...Array(idArr.length)];
         for (var i = 0; i < idArr.length; i++) {
             arr[i] = await Axios.get('http://localhost:5000/profiles/' + idArr[i])
                 .then(profile => {
@@ -127,42 +136,36 @@ function TeamDisplay(props) {
         setMembers(arr);
     }
 
-    /*
-    var memberCards = members.map(member => {
-        <Col className="col-6 col-lg-3 col-md-4"><TeamCard member={member}/></Col>
-    });
-    */
     return (
-        <>
-            {
-                !members ? <div>no members entered</div> : 
-                <div className="project-display">
-                <Container className="technology-display">
-                    <h1 className="header">Our Team</h1>
-                    <Row>
-                        {members.map(member => 
-
-                            <Col className="col-6 col-lg-3 col-md-4"><TeamCard member={member}/></Col>
-                            )}
-                    </Row>
-                </Container>
-                </div>
-            }
-        </>
+        <div className="project-display">
+        <Container className="technology-display">
+            <h1 className="header">Our Team</h1>
+            <Row>
+                {
+                    !members ? <div className="icon"></div> :
+                    members.map(member => 
+                    <Col className="col-6 col-lg-3 col-md-4"><TeamCard member={member}/></Col>
+                    )
+                }
+            </Row>
+        </Container>
+        </div>
     );
 }
 
-//TOEJTEJKRL change href to have id
+//renders individual member card
 function TeamCard(props) {
-    return <>{
-        !props.member ? <div>no members entered</div> : 
+    return <> {
         <div>
-            <Link href={"/Profile?id=" + props.member.id}><img className="icon" src={props.member.image}></img></Link>
+            <Link href={"/Profile?id=" + props.member.id}>
+                <img className="icon" src={props.member.image} alt="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></img>
+            </Link>
             <h4>{props.member.firstname + " " + props.member.lastname}</h4>
         </div>
     }</>
 }
 
+///form for joining project
 const JoinForm = (props) => {
     return (
         <div className="form-display">
@@ -209,7 +212,5 @@ const JoinForm = (props) => {
         </div>
     );
   }
-
-
 
 export default withLayout(Project);
