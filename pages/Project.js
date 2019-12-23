@@ -12,46 +12,51 @@ import {useRouter} from 'next/router';
 import Axios from 'axios';
 
 function Project() {
+    const [project, setProject] = useState({
+        name: "",
+        shortDescription: "",
+        longDescription: "",
+        technologies: [],
+        members: [],
+    });
+
     const router = useRouter();
-    const [name, setName] = useState("");
-    const [shortDescription, setShortDescription] = useState("");
-    const [longDescription, setLongDescription] = useState("");
-    const [technologies, setTechnologies] = useState([]);
-    const [team, setTeam] = useState([]);
 
     useEffect(() => {
-        Axios.get('http://localhost:5000/projects/' + router.query.id)
+        if (!project.name) {
+            getProject();
+        }
+    }, [project]);
+
+    const getProject = async () => {
+
+        let proj = await Axios.get('http://localhost:5000/projects/' + router.query.id)
             .then(project => {
-                setName(project.data.projectname);
-                setShortDescription(project.data.shortdescription);
-                setLongDescription(project.data.longdescription);
-                const setTech = (t) => { //put somewhere else later
-                    var arr = [];
-                    t.forEach(tech => {
+                return {
+                    name: project.data.projectname,
+                    shortDescription: project.data.shortdescription,
+                    longDescription: project.data.longdescription,
+                    technologies: project.data.technologies.map(tech => {
                         var techName = tech.technology;
                         var techImage = tech.image;
-                        arr.push(new Object({name: techName, image: techImage}));
-                    })
-                    return arr;
-                }
-                setTechnologies(setTech(project.data.technologies));
-                const setMembers = (t) => {
-                    var arr = [];
-                    t.forEach(member => {
-                        arr.push(member._id);
-                    })
-                    return arr;
-                }
-                setTeam(setMembers(project.data.members));
+                        return {name: techName, image: techImage};
+                    }),
+                    members: project.data.members.map(member => member._id),
+                };
             });
-    }, []); //second param makes useffect only run once (safari stopped freezing!!)
+        setProject(proj);
+    }
 
     return (
         <>
-            <ProjectIntro name={name} shortDescription={shortDescription}/>
-            <TechnologyDisplay technologies={technologies}/>
-            <TeamDisplay team={team}/>
-            <JoinForm/>
+            {
+                !project ? <div>project not found</div>: <>
+                    <ProjectIntro name={project.name} shortDescription={project.shortDescription}/>
+                    <TechnologyDisplay technologies={project.technologies}/>
+                    <TeamDisplay team={project.members}/>
+                    <JoinForm/>
+                </>
+            }
         </>
     );
 }
@@ -67,7 +72,6 @@ const ProjectIntro = (props) => {
     );
 };
 
-//TODO fix technolgoydisplay
 function TechnologyDisplay(props) {
     var technologyCards = [];
     props.technologies.forEach(technology => {
@@ -97,48 +101,66 @@ function TechnologyCard(props) {
     </Container>
 }
 
-//TODO fix profile
 function TeamDisplay(props) {
-    const [teamCards, setTeamCards] = useState([]);
-    useEffect(() => {
-        props.team.forEach(id => {
-            Axios.get('http://localhost:5000/profiles/' + id)
-                .then(profile => { //profile from id
-                    const newTeamCard = () => {
-                        var member = {
-                            id: id,
-                            firstname: profile.data.firstname,
-                            lastname: profile.data.lastname,
-                            image: profile.data.image,
-                        };
-                        return <Col className="col-6 col-lg-3 col-md-4"><TeamCard member={member}/></Col>;
-                    }
-                    setTeamCards([newTeamCard(), ...teamCards]);
-                });
-        });
-    }, [teamCards.length == props.team.length]);
+    var idArr = props.team;
+    const [members, setMembers] = useState([]);
 
+    useEffect(() => {
+        if (idArr.length == members.length) { //||members[0]
+            getTeam();
+        }
+    }, [idArr]);
+
+    const getTeam = async () => {
+        var arr = [0,0,0];
+        for (var i = 0; i < idArr.length; i++) {
+            arr[i] = await Axios.get('http://localhost:5000/profiles/' + idArr[i])
+                .then(profile => {
+                    return {
+                        id: idArr[i],
+                        firstname: profile.data.firstname,
+                        lastname: profile.data.lastname,
+                        image: profile.data.image,
+                    };
+                });
+        }
+        setMembers(arr);
+    }
+
+    /*
+    var memberCards = members.map(member => {
+        <Col className="col-6 col-lg-3 col-md-4"><TeamCard member={member}/></Col>
+    });
+    */
     return (
-        <div className="project-display">
-            <Container className="technology-display">
-                <h1 className="header">Our Team</h1>
-                <Row>
-                    {teamCards}
-                </Row>
-            </Container>
-        </div>
+        <>
+            {
+                !members ? <div>no members entered</div> : 
+                <div className="project-display">
+                <Container className="technology-display">
+                    <h1 className="header">Our Team</h1>
+                    <Row>
+                        {members.map(member => 
+
+                            <Col className="col-6 col-lg-3 col-md-4"><TeamCard member={member}/></Col>
+                            )}
+                    </Row>
+                </Container>
+                </div>
+            }
+        </>
     );
 }
 
-
+//TOEJTEJKRL change href to have id
 function TeamCard(props) {
-        //change 1 to something else later obviously
-        //TOEJTEJKRL change href to have id
-        //*******read this */
-    return <div>
+    return <>{
+        !props.member ? <div>no members entered</div> : 
+        <div>
             <Link href={"/Profile?id=" + props.member.id}><img className="icon" src={props.member.image}></img></Link>
             <h4>{props.member.firstname + " " + props.member.lastname}</h4>
         </div>
+    }</>
 }
 
 const JoinForm = (props) => {
