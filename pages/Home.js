@@ -21,6 +21,7 @@ import '../style.css';
 import Axios from 'axios';
 import ProjectDisplay from './Projects';
 import Header from '../comps/Header';
+ 
 /**
  * TODO in future:
  * make project and usernames unique so that urls look prettier
@@ -28,7 +29,7 @@ import Header from '../comps/Header';
 
  //displays home page
 const Home = () => (
-    <div>
+    <div> 
         <IntroDisplay/>
     </div>
 ); //<SignUp/>
@@ -40,19 +41,31 @@ const IntroDisplay = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => {
         setIsOpen(!isOpen);
+        let home = document.getElementById("home");
+        if (home) {
+            home.id = "home-change";
+        }
+        let jumbo = document.getElementById("home-jumbotron");
+        if (jumbo) {
+            jumbo.id = "home-jumbotron-change";
+        }
         scrollDown();
     }
 
     function scrollDown(props) {
-        window.scrollHeight
-        window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+
+        var Scroll = require('react-scroll');
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToBottom();
+        //window.scrollHeight
+        //window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
     }
     return (
         <>
-            <div className="home">
+            <div id="home">
                 <HomeHeader/>
                 <div className="d-flex justify-content-center" >
-                    <Jumbotron>
+                    <Jumbotron id="home-jumbotron">
                         <h1 className="display-3">SkunkWorks</h1>
                         <p className="lead">Start a project.   Join a team.   Build a community.</p>
                         <hr className="my-2"/>
