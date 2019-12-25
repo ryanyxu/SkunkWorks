@@ -41,14 +41,6 @@ const IntroDisplay = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => {
         setIsOpen(!isOpen);
-        let home = document.getElementById("home");
-        if (home) {
-            home.id = "home-change";
-        }
-        let jumbo = document.getElementById("home-jumbotron");
-        if (jumbo) {
-            jumbo.id = "home-jumbotron-change";
-        }
         scrollDown();
     }
 
