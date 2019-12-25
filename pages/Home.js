@@ -61,7 +61,7 @@ const IntroDisplay = () => {
         //window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
     }
     return (
-        <>
+        <div id="home-background">
             <div id="home">
                 <HomeHeader/>
                 <div className="d-flex justify-content-center" >
@@ -83,7 +83,7 @@ const IntroDisplay = () => {
             <Collapse isOpen={isOpen}>
                 <ProjectDisplay/>
             </Collapse>
-        </>
+        </div>
     );
 };
 

@@ -6,32 +6,30 @@
     --color1: rgb(231, 113, 125);
     --color2: rgb(194, 185, 176);
     --color3: rgb(175, 210, 117);
-    --coolColor1: 
+    --colorOpacity: .7;
 }
 /*background color change */
 @keyframes colorchange
 {
-    0%   {background: rgb(104, 129, 172);}
-    25%  {background: rgb(81, 139, 188);}
-    50%  {background: rgb(83, 119, 177);}
-    75%  {background: rgb(113, 108, 167);}
-    100% {background: rgb(104, 129, 172);}
+    0%   {background: rgba(104, 129, 172, var(--colorOpacity));}
+    25%  {background: rgba(81, 139, 188, var(--colorOpacity));}
+    50%  {background: rgba(81, 101, 134, var(--colorOpacity));}
+    75%  {background: rgba(126, 121, 179, var(--colorOpacity));}
+    100% {background: rgba(104, 129, 172, var(--colorOpacity));}
 }
-
 @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
 {
-    0%   {background: rgb(104, 129, 172);}
-    25%  {background: rgb(81, 139, 188);}
-    50%  {background: rgb(83, 119, 177);}
-    75%  {background: rgb(113, 108, 167);}
-    100% {background: rgb(104, 129, 172);}
+    0%   {background: rgba(62, 88, 133, var(--colorOpacity));}
+    25%  {background: rgb(81, 139, 188, var(--colorOpacity));}
+    50%  {background: rgb(83, 119, 177, var(--colorOpacity));}
+    75%  {background: rgb(126, 121, 179, var(--colorOpacity));}
+    100% {background: rgb(104, 129, 172, var(--colorOpacity));}
 }
 /* apparently helps the thing flex to the bottom */
 * { padding: 0; margin: 0; }
 
 html, body {
   height: 100%;
-  scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
 }
@@ -40,14 +38,29 @@ body > * {
   flex-shrink: 0;
 }
 
+
 /* Home */
+
+#home-background {
+    background-image: url("https://live.staticflickr.com/3517/3307874546_4f79059b54_c.jpg");
+    
+    /*
+    background:linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("https://live.staticflickr.com/3517/3307874546_4f79059b54_c.jpg");
+    
+    background-attachment: local;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white; */
+}
+
 #home {
     animation: colorchange 20s infinite;
     -webkit-animation: colorchange 20s infinite; /* Chrome and Safari */
     flex-grow: 1;
     overflow-y: hidden;
     padding-bottom: 6%;
-    transition: all .5s;
+    transition: all 1s;
 }
 #home-change {
     flex-grow: 1;
@@ -55,12 +68,12 @@ body > * {
     padding-bottom: 6%;
     animation: colorchange 20s infinite;
     -webkit-animation: colorchange 20s infinite; /* Chrome and Safari */
-    box-shadow: 0px 12px 18px 12px rgb(167, 167, 167);
-    margin-bottom: 5%;
+    box-shadow: 0 30px 40px rgba(0,0,0,0.8);
+    margin-bottom: 10%;
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 1%;
-    transition: all .5s;
+    transition: all 1s;
 }
 
 #home-jumbotron {
@@ -75,7 +88,7 @@ body > * {
     border: 2px solid white;
     display: flex;
     flex-direction: column;
-    transition: all .5s;
+    transition: all 1.2s;
 }
 
 #home-jumbotron-change {
@@ -90,7 +103,7 @@ body > * {
     border: 2px solid white;
     display: flex;
     flex-direction: column;
-    transition: all .5s;
+    transition: all 1.2s;
 }
 
 .nav > a{
@@ -137,22 +150,14 @@ body > * {
   }
 }
 
+
+/* project stuff starts here */
 .project-display {
     width: 100%;
     height: 45rem;
     background-color: transparent;
 }
 
-.form-display {
-    width: 100%;
-    /*background-image: url("https://dailygazette.com/sites/default/files/styles/article_image/public/shutterstock_376933627.jpg?itok=dyAE7VSq");
-*/
-    background-color: var(--color3);
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
 
 
 .transparent {
@@ -167,12 +172,18 @@ body > * {
     border: 1px solid white;
 }
 
-.project {
+.project-card {
     margin-top: 7%;
     margin-left: 7%;
     margin-right: 7%;
     margin-bottom: 5%;
-    opacity: .85;
+    opacity: .90;
+    transition: all .7s;
+}
+.card-shadow {
+    opacity: 1;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.8);
+    transition: all .7s;
 }
 
 .header {
