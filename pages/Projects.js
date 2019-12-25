@@ -75,11 +75,8 @@ const ProjectDisplay = () => {
 
     return (
         <div className="project-display parallax">
-            <div className="header">Current Projects</div>
+            <div className="header">Projects</div>
             <Row>
-                <Col className="col-12 col-lg-4 col-md-6">
-                    <ProjectCard project={mockProject("asdf")}/>
-                </Col>
                 <Col className="col-12 col-lg-4 col-md-6">
                     <ProjectCard project={mockProject("sdfg")}/>
                 </Col>

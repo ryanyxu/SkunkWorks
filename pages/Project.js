@@ -5,12 +5,14 @@ import withLayout from '../comps/Layout';
 import {Container, Row, Col, Jumbotron, Button,
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Form, FormGroup,
-    Label, Input, FormFeedback, FormText} from 'reactstrap';
+    Label, Input, FormFeedback, FormText,
+    TabContent, TabPane, Nav, NavItem, NavLink} from 'reactstrap';
 
 import React, { useState, useEffect } from 'react';
 import {useRouter} from 'next/router';
 import Axios from 'axios';
-
+import Header from '../comps/Header';
+import classnames from 'classnames';
 //displays individual project
 function Project() {
     const router = useRouter();
@@ -51,30 +53,107 @@ function Project() {
     };
 
     return (
-        <>
+        <div id="project" onScroll={handleClick}>
             {
-                !project ? <div>project not found</div>: <>
+                !project ? <div>project not found</div>:
+                <>
                     <ProjectIntro name={project.name} shortDescription={project.shortDescription}/>
-                    <TechnologyDisplay technologies={project.technologies}/>
-                    <TeamDisplay team={project.members}/>
-                    <JoinForm/>
+                    <Tabs project={project}/>
+                    
                 </>
             }
-        </>
+        </div>
     );
 }
+//<JoinForm/>
+//<TechnologyDisplay technologies={project.technologies}/>
+//<TeamDisplay team={project.members}/>
 
 //displays project name and short description
+const handleClick = () => {
+    let proj = document.getElementById("project-intro");
+    if (proj) proj.id=("project-change");
+    let jumb = document.getElementById("project-jumbotron");
+    if (jumb) jumb.id = "project-jumbotron-change";
+    let intro = document.getElementById("project-change");
+    if (intro) {
+        intro.classList.remove("opacity-095");
+        intro.classList.add("opacity-06");
+        intro.className.replace("opacity-095", "opacity-06");
+    }
+}
 const ProjectIntro = (props) => {
     return (
-        <div className="d-flex justify-content-center intro-display">
-            <Jumbotron>
-                <h1 className="display-3">{props.name}</h1>
-                <p className="lead">{props.shortDescription}</p>
-            </Jumbotron>
+        <div id="project-intro"  className="color-change opacity-095">
+            <Header/>
+            <div className="d-flex justify-content-center">
+                <Jumbotron id="project-jumbotron">
+                    <h1 id="project-name" className="display-3">{props.name}</h1>
+                    <p className="lead">{props.shortDescription}</p>
+                    <Button onClick={handleClick}/>
+                </Jumbotron>
+            </div>
         </div>
     );
 };
+
+
+
+const Tabs = (props) => {
+  const [activeTab, setActiveTab] = useState('1');
+
+  const toggle = tab => {
+    if(activeTab !== tab) setActiveTab(tab);
+  }
+
+  return (
+    <div>
+      <Nav tabs>
+        <NavItem>
+          <NavLink
+            className={classnames({ active: activeTab === '1' })}
+            onClick={() => { toggle('1'); }}
+          >
+              tech
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            className={classnames({ active: activeTab === '2' })}
+            onClick={() => { toggle('2'); }}
+          >
+            team
+          </NavLink>
+        </NavItem>
+      </Nav>
+      <TabContent activeTab={activeTab}>
+        <TabPane tabId="1">
+          <Row>
+            <Col >
+          <TechnologyDisplay technologies={props.project.technologies}/>
+            </Col>
+          </Row>
+        </TabPane>
+        <TabPane tabId="2">
+          <Row>
+            <Col >
+
+            <TeamDisplay team={props.project.members}/>
+            </Col>
+          </Row>
+        </TabPane>
+      </TabContent>
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
 
 //displays technologies used
 function TechnologyDisplay(props) {
@@ -96,7 +175,7 @@ function TechnologyDisplay(props) {
     });
 
     return (
-        <div className="project-display">
+        <div>
             <Container className="technology-display">
                 <h1 className="header">Technologies Used</h1>
                 <Row>
@@ -149,8 +228,8 @@ function TeamDisplay(props) {
     }
 
     return (
-        <div className="project-display">
-        <Container className="technology-display">
+        <div>
+        <Container >
             <h1 className="header">Our Team</h1>
             <Row>
                 {
@@ -214,4 +293,4 @@ const JoinForm = (props) => {
     );
   }
 
-export default withLayout(Project);
+export default Project;

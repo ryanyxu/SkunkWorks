@@ -16,31 +16,33 @@ import {
   NavbarText
 } from 'reactstrap';
 
-const Header = (props) => {
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
   return (
-    <div>
-      <Navbar color="light" className= "transparent" expand="md">
-        <NavbarBrand href="/Home">SkunkWorks</NavbarBrand>
+      <div>
+      <Navbar className="nav" expand="md">
+        <NavbarBrand href="/">SkunkWorks</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/about">about us</NavLink>
+              <NavLink href="/About">About</NavLink>
             </NavItem>
-
             <NavItem>
-              <NavLink href="/Projects">Projects</NavLink>
+              <NavLink href="/">temp</NavLink>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-            </UncontrolledDropdown>
+            <NavItem>
+              <NavLink href="/">Login</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/">temp</NavLink>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
     </div>
   );
 }
-
 export default Header;

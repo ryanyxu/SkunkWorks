@@ -6,25 +6,50 @@
     --color1: rgb(231, 113, 125);
     --color2: rgb(194, 185, 176);
     --color3: rgb(175, 210, 117);
-    --colorOpacity: 0;
+    --colorOpacity: .93;
 }
 /*background color change */
-@keyframes colorchange
-{
-    0%   {background: rgba(104, 129, 172, var(--colorOpacity));}
-    25%  {background: rgba(81, 139, 188, var(--colorOpacity));}
-    50%  {background: rgba(81, 101, 134, var(--colorOpacity));}
-    75%  {background: rgba(126, 121, 179, var(--colorOpacity));}
-    100% {background: rgba(104, 129, 172, var(--colorOpacity));}
-}
-@-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
-{
+/*
+
     0%   {background: rgba(104, 129, 172, var(--colorOpacity));}
     25%  {background: rgb(81, 139, 188, var(--colorOpacity));}
     50%  {background: rgb(83, 119, 177, var(--colorOpacity));}
     75%  {background: rgb(126, 121, 179, var(--colorOpacity));}
     100% {background: rgb(104, 129, 172, var(--colorOpacity));}
+*/
+@keyframes colorchange
+{
+    0%   {background: rgb(156, 185, 230);}
+    25%  {background: rgb(142, 149, 219);}
+    50%  {background: rgb(157, 135, 195);}
+    75%  {background: rgb(128, 149, 187);}
+    100% {background: rgb(156, 185, 230);}
 }
+@-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+{
+    0%   {background: rgb(156, 185, 230);}
+    25%  {background: rgb(142, 149, 219);}
+    50%  {background: rgb(157, 135, 195);}
+    75%  {background: rgb(128, 149, 187);}
+    100% {background: rgb(156, 185, 230);}
+}
+
+.color-change {
+    animation: colorchange 20s infinite;
+    -webkit-animation: colorchange 20s infinite; /* Chrome and Safari */
+    flex-grow: 1;
+    overflow-y: hidden;
+    padding-bottom: 6%;
+    transition: all 1s;
+}
+
+.opacity-095 {
+    opacity: 1;
+}
+.opacity-06 {
+    opacity: .8;
+}
+
 /* apparently helps the thing flex to the bottom */
 * { padding: 0; margin: 0; }
 
@@ -42,75 +67,35 @@ body > * {
 /* Home */
 
 #home-background {
-    /*
-    background-image: url("https://live.staticflickr.com/3517/3307874546_4f79059b54_c.jpg");
-    */
-    background-image: url("https://base.imgix.net/files/base/ebm/asumag/image/2019/04/asumag_6310_brandeis_0.png");
+    background-image: url("https://media.licdn.com/dms/image/C511BAQE01Nz-hKBHZQ/company-background_10000/0?e=1577386800&v=beta&t=QMr3wOmqNurY2Xwz-l5zAIf9XEJ_9f_0R1nFWicdNJU");
     
     background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-#home-background-change {
-
-    background-image: url("https://live.staticflickr.com/3517/3307874546_4f79059b54_c.jpg");
-    background-attachment: scroll;
-    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 #home {
-    animation: colorchange 20s infinite;
-    -webkit-animation: colorchange 20s infinite; /* Chrome and Safari */
-    flex-grow: 1;
-    overflow-y: hidden;
     padding-bottom: 6%;
-    transition: all 1s;
 }
-#home-change {
-    flex-grow: 1;
-    overflow-y: hidden;
-    padding-bottom: 6%;
-    animation: colorchange 20s infinite;
-    -webkit-animation: colorchange 20s infinite; /* Chrome and Safari */
-    box-shadow: 0 30px 40px rgba(0,0,0,0.8);
-    margin-bottom: 10%;
-    margin-left: 10%;
-    margin-right: 10%;
-    transition: all 1s;
-}
+
 
 #home-jumbotron {
-    background: rgba(255, 255, 255, 0.85);
-    color: darkgray;
+    background: rgba(255, 255, 255, 0.75);
+    color: black;
     width: 100%;
     height: 100%;
     margin-left: 20%;
     margin-right: 20%;
-    margin-top: 10%;
+    margin-top: 8%;
     margin-bottom: 10%;
-    border: 2px solid white;
     display: flex;
     flex-direction: column;
     transition: all 1.2s;
 }
 
-#home-jumbotron-change {
-    background: transparent;
-    color: white;
+.project-display {
     width: 100%;
-    height: 100%;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    border: 2px solid white;
-    display: flex;
-    flex-direction: column;
-    transition: all 1.2s;
+    background: rgb(183, 221, 213);
 }
 
 .nav > a{
@@ -157,14 +142,55 @@ body > * {
   }
 }
 
-
 /* project stuff starts here */
-.project-display {
-    width: 100%;
-    height: 45rem;
-    background-color: white;
+
+#project {
+    background-image: url("https://live.staticflickr.com/3517/3307874546_4f79059b54_c.jpg");
+
+}
+#project-change {
+    flex-grow: 1;
+    overflow-y: hidden;
+    padding-bottom: 6%;
+    animation: colorchange 20s infinite;
+    -webkit-animation: colorchange 20s infinite; /* Chrome and Safari */
+    box-shadow: 0 30px 40px rgba(0,0,0,0.8);
+    margin-bottom: 30%;
+    transition: all 1s;
 }
 
+
+#project-jumbotron {
+    background: transparent;
+    color: white;
+    width: 100%;
+    height: 100%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 8%;
+    margin-bottom: 10%;
+    display: flex;
+    flex-direction: column;
+    transition: all 1.2s;
+}
+
+#project-jumbotron-change > #project-name {
+    font-size: 3rem;
+}
+
+#project-jumbotron-change {
+    background: transparent;
+    color: white;
+    width: 100%;
+    height: 50%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    display: flex;
+    flex-direction: column;
+    transition: all 1.2s;
+}
 
 
 .transparent {
@@ -172,11 +198,6 @@ body > * {
     -webkit-box-shadow: 0px 0px;
     box-shadow: 0px 0px;
     background-color: rgba(0,0,0,0.0);
-}
-.about-button {
-    color: white;
-    background: transparent;
-    border: 1px solid white;
 }
 
 .project-card {
@@ -195,8 +216,8 @@ body > * {
 
 .header {
     font-size: 3rem;
-    background: rgba(255, 255, 255, 0.85);
     text-align: center;
+    color: white;
 }
 
 
@@ -208,11 +229,6 @@ body > * {
     padding-left: 3%;
     padding-right: 3%;
     padding-bottom: 5%;
-}
-
-.technology-display {
-    font-size: 2.5rem;
-    padding-bottom: 3%;
 }
 
 .icon {

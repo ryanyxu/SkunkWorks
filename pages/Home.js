@@ -55,7 +55,7 @@ const IntroDisplay = () => {
     return (
         <div id="home-background">
             <div id="home">
-                <HomeHeader/>
+                <Header/>
                 <div className="d-flex justify-content-center" >
                     <Jumbotron id="home-jumbotron">
                         <h1 className="display-3">SkunkWorks</h1>
@@ -66,7 +66,7 @@ const IntroDisplay = () => {
                     </Jumbotron>
                 </div>
                     <div className="d-flex justify-content-center">
-                        <Button className="about-button" color="light" onClick={toggle}>View Projects</Button>
+                        <Button outline color="light" size="lg" id="open-project-btn" onClick={toggle}>View Projects</Button>
                     </div>
                     <Collapse isOpen={isOpen}>
                         <div className="arrow bounce d-flex justify-content-center" onClick={scrollDown}></div>
@@ -78,36 +78,6 @@ const IntroDisplay = () => {
         </div>
     );
 };
-
-const HomeHeader = () => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggle = () => setIsOpen(!isOpen);
-    return (
-        <div>
-        <Navbar className="nav" expand="md">
-          <NavbarBrand href="/">SkunkWorks</NavbarBrand>
-          <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-              <NavItem>
-                <NavLink href="/About">About</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/">temp</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/">Login</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/">temp</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
-    );
-}
 
 
 //sign up form
