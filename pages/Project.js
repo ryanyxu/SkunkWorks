@@ -78,6 +78,16 @@ const ProjectIntro = (props) => {
 
 //displays technologies used
 function TechnologyDisplay(props) {
+    //renders individual technology card
+    //in the future will want a large database of icons for every possible framework/technology
+    //can possibly reuse code in tech, team, and project display and pass classname as parameters for styling
+    const TechnologyCard = (props) => {
+        return <div >
+            <img className="icon" src={props.tech.image}/>
+            <h4>{props.tech.name}</h4>
+        </div>
+    }
+
     var technologyCards = [];
     props.technologies.forEach(technology => {
         technologyCards.push(
@@ -97,18 +107,20 @@ function TechnologyDisplay(props) {
     );
 }
 
-//renders individual technology card
-//in the future will want a large database of icons for every possible framework/technology
-//can possibly reuse code in tech, team, and project display and pass classname as parameters for styling
-function TechnologyCard(props) {
-    return <Container>
-        <img className="icon" src={props.tech.image}/>
-        <h4>{props.tech.name}</h4>
-    </Container>
-}
-
 //displays project team
 function TeamDisplay(props) {
+    //renders individual member card
+    var TeamCard = (props) => {
+        return <> {
+            <div >
+                <Link href={"/Profile?id=" + props.member.id}>
+                    <img className="icon" src={props.member.image} alt="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></img>
+                </Link>
+                <h4>{props.member.firstname + " " + props.member.lastname}</h4>
+            </div>
+        }</>
+    }
+
     var idArr = props.team;
     const [members, setMembers] = useState([]);
 
@@ -153,17 +165,6 @@ function TeamDisplay(props) {
     );
 }
 
-//renders individual member card
-function TeamCard(props) {
-    return <> {
-        <div>
-            <Link href={"/Profile?id=" + props.member.id}>
-                <img className="icon" src={props.member.image} alt="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></img>
-            </Link>
-            <h4>{props.member.firstname + " " + props.member.lastname}</h4>
-        </div>
-    }</>
-}
 
 ///form for joining project
 const JoinForm = (props) => {

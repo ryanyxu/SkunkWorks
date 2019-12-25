@@ -22,13 +22,17 @@ const Header = (props) => {
   const toggle = () => setIsOpen(!isOpen);
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar color="light" className= "transparent" expand="md">
         <NavbarBrand href="/Home">SkunkWorks</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
               <NavLink href="/about">about us</NavLink>
+            </NavItem>
+
+            <NavItem>
+              <NavLink href="/Projects">Projects</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
             </UncontrolledDropdown>

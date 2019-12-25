@@ -5,11 +5,22 @@ import React, { useState , useEffect } from 'react';
 import {Container, Row, Col, Jumbotron, Button,
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Form, FormGroup,
-    Label, Input, FormFeedback, FormText} from 'reactstrap';
+    Label, Input, FormFeedback, FormText, Collapse, Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+    NavbarText, } from 'reactstrap';
 import Link from 'next/link';
 import '../style.css';
 import Axios from 'axios';
-
+import ProjectDisplay from './Projects';
+import Header from '../comps/Header';
 /**
  * TODO in future:
  * make project and usernames unique so that urls look prettier
@@ -19,92 +30,80 @@ import Axios from 'axios';
 const Home = () => (
     <div>
         <IntroDisplay/>
-        <ProjectDisplay/>
-        <SignUp/>
     </div>
-);
+); //<SignUp/>
 
 //displays intro screen with jumbotron and description
-const IntroDisplay = (props) => {
+const IntroDisplay = () => {
+
+    //for collapse
+    const [isOpen, setIsOpen] = useState(false);
+    const toggle = () => {
+        setIsOpen(!isOpen);
+        scrollDown();
+    }
+
     function scrollDown(props) {
+        window.scrollHeight
         window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
     }
     return (
-        <div className="d-flex justify-content-center intro-display">
-            <Jumbotron>
-                <h1 className="display-3">SkunkWorks</h1>
-                <p className="lead">Start a project.   Join a team.   Build a community.</p>
-                <hr className="my-2"/>
-                <br></br>
-                <p>Work on something you're proud of.</p>
-                <p className="lead">
-                    <Button color="primary" onClick={scrollDown}>Become a Skunkworker</Button>
-                </p>
-            </Jumbotron>
-        </div>
+        <>
+            <div className="home">
+                <HomeHeader/>
+                <div className="d-flex justify-content-center" >
+                    <Jumbotron>
+                        <h1 className="display-3">SkunkWorks</h1>
+                        <p className="lead">Start a project.   Join a team.   Build a community.</p>
+                        <hr className="my-2"/>
+                        <br></br>
+                        <p>Work on something you're proud of.</p>
+                    </Jumbotron>
+                </div>
+                    <div className="d-flex justify-content-center">
+                        <Button className="about-button" color="light" onClick={toggle}>View Projects</Button>
+                    </div>
+                    <Collapse isOpen={isOpen}>
+                        <div className="arrow bounce d-flex justify-content-center" onClick={scrollDown}></div>
+                    </Collapse>
+            </div>
+            <Collapse isOpen={isOpen}>
+                <ProjectDisplay/>
+            </Collapse>
+        </>
     );
 };
 
-//gets projects from db and displays them
-const ProjectDisplay = () => {
-    const [projects, setProjects] = useState([]);
+const HomeHeader = () => {
+    const [isOpen, setIsOpen] = useState(false);
 
-    useEffect(() => {
-        if (projects.length == 0) {
-            getProjects();
-        }
-    });
-
-    //retrieve projects from server
-    const getProjects = async () => {
-        setProjects(
-            await Axios.get('http://localhost:5000/projects/')
-            .then(response => {
-                return response.data.map(project => new Object({ //possibly make project object later
-                        id: project._id.toString(),
-                        name: project.projectname,
-                        description: project.shortdescription,
-                        image: project.image
-                    })
-                );
-            })
-        )
-    };
-
-    //renders individual project card
-    const ProjectCard = (props) => {
-        return (
-            <div>
-                <Card className="project">
-                    <CardImg top width="100%" src={props.project.image} />
-                    <CardBody>
-                    <CardTitle>{props.project.name}</CardTitle>
-                    <CardText>{props.project.description}</CardText>
-                    <Link href={'/Project?id=' + props.project.id}>
-                        <Button>Learn More</Button>
-                    </Link>
-                    </CardBody>
-                </Card>
-            </div>
-        );
-    }
-
+    const toggle = () => setIsOpen(!isOpen);
     return (
-        <div className="project-display parallax">
-            <div className="header">Current Projects</div>
-            <Row>
-                {
-                    !projects ? <></> :
-                    projects.map(project => {
-                        return(<Col className="col-12 col-lg-4 col-md-6">
-                            <ProjectCard project={project}/>
-                        </Col>);
-                    })
-                }
-            </Row>
-        </div>
+        <div>
+        <Navbar className="nav" expand="md">
+          <NavbarBrand href="/">SkunkWorks</NavbarBrand>
+          <NavbarToggler onClick={toggle} />
+          <Collapse isOpen={isOpen} navbar>
+            <Nav className="mr-auto" navbar>
+              <NavItem>
+                <NavLink href="/About">About</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/">temp</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/">Login</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/">temp</NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
+      </div>
     );
 }
+
 
 //sign up form
 const SignUp = (props) => {
@@ -161,5 +160,5 @@ const SignUp = (props) => {
     );
 }
 
-export default withLayout(Home);
+export default Home;
 
