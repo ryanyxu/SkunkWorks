@@ -31,13 +31,10 @@ const Header = () => {
               <NavLink href="/About">About</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/">temp</NavLink>
-            </NavItem>
-            <NavItem>
               <NavLink href="/">Login</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/">temp</NavLink>
+              <NavLink href="/">Contact Us</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

@@ -78,10 +78,10 @@ const ProjectDisplay = () => {
             <div className="header">Projects</div>
             <Row>
                 <Col className="col-12 col-lg-4 col-md-6">
-                    <ProjectCard project={mockProject("sdfg")}/>
+                    <ProjectCard project={mockProject("test1")}/>
                 </Col>
                 <Col className="col-12 col-lg-4 col-md-6">
-                    <ProjectCard project={mockProject("dfgh")}/>
+                    <ProjectCard project={mockProject("test2")}/>
                 </Col>
                 {
                     !projects ? <></> :

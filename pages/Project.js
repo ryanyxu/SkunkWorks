@@ -6,13 +6,14 @@ import {Container, Row, Col, Jumbotron, Button,
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Form, FormGroup,
     Label, Input, FormFeedback, FormText,
-    TabContent, TabPane, Nav, NavItem, NavLink} from 'reactstrap';
+    TabContent, TabPane, Nav, NavItem, NavLink, Collapse} from 'reactstrap';
 
 import React, { useState, useEffect } from 'react';
 import {useRouter} from 'next/router';
 import Axios from 'axios';
 import Header from '../comps/Header';
 import classnames from 'classnames';
+import ProjectDisplay from './Projects';
 //displays individual project
 function Project() {
     const router = useRouter();
@@ -53,12 +54,11 @@ function Project() {
     };
 
     return (
-        <div id="project" onScroll={handleClick}>
+        <div id="project">
             {
                 !project ? <div>project not found</div>:
                 <>
-                    <ProjectIntro name={project.name} shortDescription={project.shortDescription}/>
-                    <Tabs project={project}/>
+                    <ProjectIntro project={project}/>
                     
                 </>
             }
@@ -70,11 +70,14 @@ function Project() {
 //<TeamDisplay team={project.members}/>
 
 //displays project name and short description
-const handleClick = () => {
+const compress = () => {
     let proj = document.getElementById("project-intro");
     if (proj) proj.id=("project-change");
     let jumb = document.getElementById("project-jumbotron");
-    if (jumb) jumb.id = "project-jumbotron-change";
+    if (jumb) {
+        jumb.id = "project-jumbotron-change";
+        jumb.classList.remove("jumbotron");
+    }
     let intro = document.getElementById("project-change");
     if (intro) {
         intro.classList.remove("opacity-095");
@@ -83,84 +86,113 @@ const handleClick = () => {
     }
 }
 const ProjectIntro = (props) => {
-    return (
-        <div id="project-intro"  className="color-change opacity-095">
-            <Header/>
-            <div className="d-flex justify-content-center">
-                <Jumbotron id="project-jumbotron">
-                    <h1 id="project-name" className="display-3">{props.name}</h1>
-                    <p className="lead">{props.shortDescription}</p>
-                    <Button onClick={handleClick}/>
-                </Jumbotron>
-            </div>
-        </div>
-    );
-};
+    const [activeTab, setActiveTab] = useState('0');
 
+    const [isOpen, setIsOpen] = useState(false);
+    const toggle = tab => {
+        if(activeTab !== tab) setActiveTab(tab);
+        setIsOpen(true);
+        compress();
+    }
 
-
-const Tabs = (props) => {
-  const [activeTab, setActiveTab] = useState('1');
-
-  const toggle = tab => {
-    if(activeTab !== tab) setActiveTab(tab);
-  }
-
-  return (
-    <div>
-      <Nav tabs>
+    const tabs = () => {
+        return <Nav tabs>
         <NavItem>
           <NavLink
             className={classnames({ active: activeTab === '1' })}
-            onClick={() => { toggle('1'); }}
-          >
-              tech
+            onClick={() => { toggle('1'); }}>
+              Learn More
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink
             className={classnames({ active: activeTab === '2' })}
-            onClick={() => { toggle('2'); }}
-          >
-            team
+            onClick={() => { toggle('2'); }}>
+              Tech Stack
           </NavLink>
         </NavItem>
-      </Nav>
-      <TabContent activeTab={activeTab}>
-        <TabPane tabId="1">
-          <Row>
-            <Col >
-          <TechnologyDisplay technologies={props.project.technologies}/>
-            </Col>
-          </Row>
-        </TabPane>
-        <TabPane tabId="2">
-          <Row>
-            <Col >
+        <NavItem>
+          <NavLink
+            className={classnames({ active: activeTab === '3' })}
+            onClick={() => { toggle('3'); }}>
+            Team Members
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            className={classnames({ active: activeTab === '4' })}
+            onClick={() => { toggle('4'); }}
+          >
+            Join Us
+          </NavLink>
+        </NavItem>
+      </Nav>;
+    }
 
-            <TeamDisplay team={props.project.members}/>
-            </Col>
-          </Row>
-        </TabPane>
-      </TabContent>
-    </div>
-  );
+    const tabContents = (project) => {
+        return (
+            <Collapse isOpen={isOpen}>
+                <TabContent activeTab={activeTab}>
+                    <TabPane tabId="1">
+                    <Row>
+                        <Col >
+                        <MoreInfo info={project.longDescription}/>
+                        </Col>
+                    </Row>
+                    </TabPane>
+                    <TabPane tabId="2">
+                    <Row>
+                        <Col >
+                    <TechnologyDisplay technologies={project.technologies}/>
+                        </Col>
+                    </Row>
+                    </TabPane>
+                    <TabPane tabId="3">
+                    <Row>
+                        <Col >
+                        <TeamDisplay team={project.members}/>
+                        </Col>
+                    </Row>
+                    </TabPane>
+                    <TabPane tabId="4">
+                    <Row>
+                        <Col >
+                            <JoinForm/>
+                        </Col>
+                    </Row>
+                    </TabPane>
+                </TabContent>
+            </Collapse>);
+        
+    }
+
+    return (
+        <div id="project-intro-background">
+            <div id="project-intro" className="color-change opacity-095">
+                <Header/>
+                <div className="d-flex justify-content-center">
+                    <Jumbotron id="project-jumbotron">
+                        <h1 id="project-name" className="display-3">{props.project.name}</h1>
+                        <p className="lead">{props.project.shortDescription}</p>
+                    </Jumbotron>
+                </div>
+                {tabs()}
+            </div>
+            {tabContents(props.project)}
+        </div>
+    );
+}
+const MoreInfo = (props) => {
+    return <div>{props.info}</div>
 }
 
-
-
-
-
-
-
-
-
 //displays technologies used
-function TechnologyDisplay(props) {
+const TechnologyDisplay = (props) => {
     //renders individual technology card
     //in the future will want a large database of icons for every possible framework/technology
     //can possibly reuse code in tech, team, and project display and pass classname as parameters for styling
     const TechnologyCard = (props) => {
+
         return <div >
             <img className="icon" src={props.tech.image}/>
             <h4>{props.tech.name}</h4>
@@ -177,7 +209,6 @@ function TechnologyDisplay(props) {
     return (
         <div>
             <Container className="technology-display">
-                <h1 className="header">Technologies Used</h1>
                 <Row>
                     {technologyCards}
                 </Row>
@@ -187,7 +218,7 @@ function TechnologyDisplay(props) {
 }
 
 //displays project team
-function TeamDisplay(props) {
+const TeamDisplay = (props) => {
     //renders individual member card
     var TeamCard = (props) => {
         return <> {
@@ -230,7 +261,6 @@ function TeamDisplay(props) {
     return (
         <div>
         <Container >
-            <h1 className="header">Our Team</h1>
             <Row>
                 {
                     !members ? <div className="icon"></div> :
@@ -249,7 +279,6 @@ function TeamDisplay(props) {
 const JoinForm = (props) => {
     return (
         <div className="form-display">
-            <h1 className="header">Join Us</h1>
             <Form className="sign-up">
                 <FormGroup>
                 <Label for="exampleText">Name</Label>
