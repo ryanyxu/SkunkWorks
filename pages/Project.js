@@ -106,13 +106,6 @@ const ProjectIntro = (props) => {
         </NavItem>
         <NavItem>
           <NavLink
-            className={classnames({ active: activeTab === '2' })}
-            onClick={() => { toggle('2'); }}>
-              Tech Stack
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
             className={classnames({ active: activeTab === '3' })}
             onClick={() => { toggle('3'); }}>
             Team Members
@@ -131,22 +124,16 @@ const ProjectIntro = (props) => {
 
     const tabContents = (project) => {
         return (
-            <Collapse isOpen={isOpen}>
+            <Collapse className="project-content" isOpen={isOpen}>
                 <TabContent activeTab={activeTab}>
                     <TabPane tabId="1">
                     <Row>
                         <Col >
-                        <MoreInfo info={project.longDescription}/>
+                        <MoreInfo info={project.longDescription} tech={project.technologies}/>
                         </Col>
                     </Row>
                     </TabPane>
-                    <TabPane tabId="2">
-                    <Row>
-                        <Col >
-                    <TechnologyDisplay technologies={project.technologies}/>
-                        </Col>
-                    </Row>
-                    </TabPane>
+                    
                     <TabPane tabId="3">
                     <Row>
                         <Col >
@@ -183,7 +170,16 @@ const ProjectIntro = (props) => {
     );
 }
 const MoreInfo = (props) => {
-    return <div>{props.info}</div>
+    return (<>
+        <Row>
+            <Col className="col-6">
+                <div>{props.info}</div>
+            </Col>
+            <Col className="col-6">
+                <TechnologyDisplay technologies={props.tech}/>
+            </Col>
+        </Row>
+    </>);
 }
 
 //displays technologies used
@@ -194,7 +190,7 @@ const TechnologyDisplay = (props) => {
     const TechnologyCard = (props) => {
 
         return <div >
-            <img className="icon" src={props.tech.image}/>
+            <img className="technology-photo" src={props.tech.image}/>
             <h4>{props.tech.name}</h4>
         </div>
     }
@@ -209,6 +205,7 @@ const TechnologyDisplay = (props) => {
     return (
         <div>
             <Container className="technology-display">
+                <h2>Tech Stack</h2>
                 <Row>
                     {technologyCards}
                 </Row>
@@ -223,10 +220,7 @@ const TeamDisplay = (props) => {
     var TeamCard = (props) => {
         return <> {
             <div >
-                <Link href={"/Profile?id=" + props.member.id}>
-                    <img className="icon" src={props.member.image} alt="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></img>
-                </Link>
-                <h4>{props.member.firstname + " " + props.member.lastname}</h4>
+                
             </div>
         }</>
     }
@@ -260,16 +254,28 @@ const TeamDisplay = (props) => {
 
     return (
         <div>
-        <Container >
-            <Row>
+        <Row >
                 {
                     !members ? <div className="icon"></div> :
                     members.map(member => 
-                    <Col className="col-6 col-lg-3 col-md-4"><TeamCard member={member}/></Col>
+                    <Col className="col-6 col-lg-4 col-md-3">
+                        <Container>
+                            <div>
+                                <Link href={"/Profile?id=" + member.id}>
+                                    <img className="project-member-photo" src={member.image} alt="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></img>
+                                </Link>
+                            </div>
+                            <div>
+                                <div>Name: {member.firstname + " " + member.lastname}</div>
+                                <div>Role: </div>
+                                <div>About me: </div>
+                            </div>
+                        </Container>
+
+                    </Col>
                     )
                 }
-            </Row>
-        </Container>
+        </Row>
         </div>
     );
 }

@@ -42,12 +42,14 @@
     transition: all 1s;
 }
 
-.opacity-095 {
-    opacity: .95;
+
+.transparent {
+    border-width: 0px;
+    -webkit-box-shadow: 0px 0px;
+    box-shadow: 0px 0px;
+    background-color: rgba(0,0,0,0.0);
 }
-.opacity-06 {
-    opacity: .95;
-}
+
 
 /* apparently helps the thing flex to the bottom */
 * { padding: 0; margin: 0; }
@@ -100,8 +102,10 @@ ul.nav.nav-tabs {
 }
 
 .project-display {
+    padding-left: 10%;
+    padding-right: 10%;
     width: 100%;
-    background: rgb(183, 221, 213);
+    background-color: rgb(184, 226, 220);
 }
 
 .project-card {
@@ -163,12 +167,31 @@ ul.nav.nav-tabs {
 }
 
 /* project stuff starts here */
+
+#__next {
+    height: 100%;
+}
+.opacity-095 {
+    opacity: .8;
+}
+.opacity-06 {
+    opacity: .6;
+}
+#project-intro {
+    height: 100%;
+    flex-grow: 1;
+}
 #project-intro-background {
-    /*
-    background-image: url("https://live.staticflickr.com/3517/3307874546_4f79059b54_c.jpg");
-    background-repeat: false;
-    background-size: 100%;
-    */
+    
+    background-image: url("https://images.unsplash.com/photo-1483662506105-be14481ce7e3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+    background-repeat: true;
+    flex-grow: 1;
+}
+
+#project {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 #project-change {
     flex-grow: 1;
@@ -179,6 +202,7 @@ ul.nav.nav-tabs {
     box-shadow: 0 30px 40px rgba(0,0,0,0.8);
     */
     transition: all 1s;
+    min-height: 100%;
 }
 
 
@@ -213,14 +237,16 @@ ul.nav.nav-tabs {
     transition: all 1.2s;
 }
 
-
-.transparent {
-    border-width: 0px;
-    -webkit-box-shadow: 0px 0px;
-    box-shadow: 0px 0px;
-    background-color: rgba(0,0,0,0.0);
+.technology-photo {
+    max-height: 10rem;
+    max-width: 10rem;
+    height: 100%;
+    width: 100%;
+    flex: 1 1 0px;
+    display: flex;
+    flex-grow: 1;
+    padding: 5%;
 }
-
 
 .sign-up {
     margin-top: 2%;
@@ -232,12 +258,24 @@ ul.nav.nav-tabs {
     padding-bottom: 5%;
 }
 
-.icon {
+.project-content {
+    padding-top: 3%;
+    padding-left: 10%;
+    padding-right: 10%;
+    min-height: 100%;
+    flex-grow: 1;
+}
+.project-member-photo {
+    max-height: 15rem;
+    max-width: 15rem;
     height: 100%;
     width: 100%;
     flex: 1 1 0px;
     display: flex;
     flex-grow: 1;
+    border-radius: 50%;
+    padding: 5%;
+    align-content: center;
 }
 
 .profile-intro {
