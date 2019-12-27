@@ -10,6 +10,7 @@ import {Container, Row, Col, Jumbotron, Button,
 import React, { useState, useEffect } from 'react';
 import {useRouter} from 'next/router';
 import Axios from 'axios';
+import Header from '../comps/Header';
 
 //profile page for a member
 const Profile = () => {
@@ -57,16 +58,18 @@ const Profile = () => {
 //displays basic profile info
 const ProfileIntro = (props) => {
     return (
-        <Row className="profile-intro">
-            <Col className="col-12 col-lg-4 col-md-4">
-                <img className="profile-picture" src={props.image}/>
-            </Col>
-            <Col className="col-12 col-lg-8 col-md-8">
-                <p>{props.name}</p>
-                <p>{props.email}</p>
-                <p>About Me: {props.about}</p>
-            </Col>
-        </Row>
+        <div className="profile-intro">
+            <Header/>
+                    <Col className="col-12 col-lg-4 col-md-4">
+                        <img className="profile-picture" src={props.image}/>
+                    </Col>
+                    <Col className="col-12 col-lg-8 col-md-8">
+                        <p>{props.name}</p>
+                        <p>{props.email}</p>
+                        <p>About Me: {props.about}</p>
+                    </Col>
+
+        </div>
     );
 };
 
@@ -144,4 +147,4 @@ const Contact = (props) => {
 
 
 
-export default withLayout(Profile);
+export default Profile;

@@ -71,18 +71,14 @@ function Project() {
 
 //displays project name and short description
 const compress = () => {
-    let proj = document.getElementById("project-intro");
-    if (proj) proj.id=("project-change");
     let jumb = document.getElementById("project-jumbotron");
     if (jumb) {
         jumb.id = "project-jumbotron-change";
-        jumb.classList.remove("jumbotron");
     }
     let intro = document.getElementById("project-change");
     if (intro) {
         intro.classList.remove("opacity-095");
         intro.classList.add("opacity-06");
-        intro.className.replace("opacity-095", "opacity-06");
     }
 }
 const ProjectIntro = (props) => {
@@ -96,7 +92,7 @@ const ProjectIntro = (props) => {
     }
 
     const tabs = () => {
-        return <Nav tabs>
+        return <Nav tabs className="project-tabs">
         <NavItem>
           <NavLink
             className={classnames({ active: activeTab === '1' })}
@@ -154,14 +150,14 @@ const ProjectIntro = (props) => {
     }
 
     return (
-        <div id="project-intro-background">
+        <div className="color-change-light">
             <div id="project-intro" className="color-change opacity-095">
                 <Header/>
                 <div className="d-flex justify-content-center">
-                    <Jumbotron id="project-jumbotron">
+                    <div id="project-jumbotron">
                         <h1 id="project-name" className="display-3">{props.project.name}</h1>
                         <p className="lead">{props.project.shortDescription}</p>
-                    </Jumbotron>
+                    </div>
                 </div>
                 {tabs()}
             </div>
@@ -260,16 +256,13 @@ const TeamDisplay = (props) => {
                     members.map(member => 
                     <Col className="col-6 col-lg-4 col-md-3">
                         <Container>
-                            <div>
-                                <Link href={"/Profile?id=" + member.id}>
-                                    <img className="project-member-photo" src={member.image} alt="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></img>
-                                </Link>
-                            </div>
-                            <div>
-                                <div>Name: {member.firstname + " " + member.lastname}</div>
-                                <div>Role: </div>
-                                <div>About me: </div>
-                            </div>
+                            <img className="project-member-photo" src={member.image} alt="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></img>
+                            <div>Name: {member.firstname + " " + member.lastname}</div>
+                            <div>Role: </div>
+                            <div>About me: </div>
+                            <Link href={"/Profile?id=" + member.id}>
+                                <Button>View Profile</Button>
+                            </Link>
                         </Container>
 
                     </Col>
@@ -284,7 +277,7 @@ const TeamDisplay = (props) => {
 ///form for joining project
 const JoinForm = (props) => {
     return (
-        <div className="form-display">
+        <div className="project-form">
             <Form className="sign-up">
                 <FormGroup>
                 <Label for="exampleText">Name</Label>

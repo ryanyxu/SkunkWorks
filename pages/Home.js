@@ -73,6 +73,7 @@ const IntroDisplay = () => {
                     </Collapse>
             </div>
             <Collapse isOpen={isOpen}>
+                <div id="whitespace">Projects</div>
                 <ProjectDisplay/>
             </Collapse>
         </div>
