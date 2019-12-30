@@ -40,7 +40,7 @@ const IntroDisplay = () => {
     //for collapse
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => {
-        setIsOpen(!isOpen);
+        setIsOpen(true);
         scrollDown();
     }
 
@@ -65,9 +65,11 @@ const IntroDisplay = () => {
                         <p>Work on something you're proud of.</p>
                     </Jumbotron>
                 </div>
-                    <div className="d-flex justify-content-center">
-                        <Button outline color="light" size="lg" id="open-project-btn" onClick={toggle}>View Projects</Button>
-                    </div>
+                    <Collapse isOpen={!isOpen}>
+                        <div className="d-flex justify-content-center">
+                            <Button outline color="light" size="lg" id="open-project-btn" onClick={toggle}>View Projects</Button>
+                        </div>
+                    </Collapse>
                     <Collapse isOpen={isOpen}>
                         <div className="arrow bounce d-flex justify-content-center" onClick={scrollDown}></div>
                     </Collapse>

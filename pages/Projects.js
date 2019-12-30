@@ -49,16 +49,14 @@ const ProjectDisplay = () => {
 
         return (
             <div>
-                <Card className="project-card" id={props.project.id + "-card"} onMouseEnter={lift} onMouseLeave={lift}>
-                    <CardImg top width="100%" src={props.project.image} />
-                    <CardBody>
-                    <CardTitle>{props.project.name}</CardTitle>
-                    <CardText>{props.project.description}</CardText>
-                    <Link href={'/Project?id=' + props.project.id}>
-                        <Button>Learn More</Button>
-                    </Link>
-                    </CardBody>
-                </Card>
+                <Link href={'/Project?id=' + props.project.id}>
+                    <Card className="project-card" id={props.project.id + "-card"} onMouseEnter={lift} onMouseLeave={lift}>
+                        <CardImg top width="100%" src={props.project.image} />
+                        <CardBody>
+                        <CardTitle>{props.project.name}</CardTitle>
+                        </CardBody>
+                    </Card>
+                </Link>
             </div>
         );
     }
@@ -74,18 +72,28 @@ const ProjectDisplay = () => {
     }
 
     return (
-        <div className="project-display parallax">
+        <div className="project-display">
             <Row>
-                <Col className="col-12 col-lg-4 col-md-6">
+                <Col className="col-12 col-lg-4 col-md-6 col-sm-6">
                     <ProjectCard project={mockProject("test1")}/>
                 </Col>
-                <Col className="col-12 col-lg-4 col-md-6">
+                <Col className="col-12 col-lg-4 col-md-6 col-sm-6">
                     <ProjectCard project={mockProject("test2")}/>
+                </Col>
+
+                <Col className="col-12 col-lg-4 col-md-6 col-sm-6">
+                    <ProjectCard project={mockProject("test1")}/>
+                </Col>
+                <Col className="col-12 col-lg-4 col-md-6 col-sm-6">
+                    <ProjectCard project={mockProject("test2")}/>
+                </Col>
+                <Col className="col-12 col-lg-4 col-md-6 col-sm-6">
+                    <ProjectCard project={mockProject("test1")}/>
                 </Col>
                 {
                     !projects ? <></> :
                     projects.map(project => {
-                        return(<Col className="col-12 col-lg-4 col-md-6">
+                        return(<Col className="col-12 col-lg-4 col-md-6 col-sm-6">
                             <ProjectCard project={project}/>
                         </Col>);
                     })

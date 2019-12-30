@@ -39,6 +39,7 @@ function Project() {
             await Axios.get('http://localhost:5000/projects/' + router.query.id)
             .then(project => {
                 return {
+                    id: router.query.id,
                     name: project.data.projectname,
                     shortDescription: project.data.shortdescription,
                     longDescription: project.data.longdescription,
@@ -55,13 +56,7 @@ function Project() {
 
     return (
         <div id="project">
-            {
-                !project ? <div>project not found</div>:
-                <>
-                    <ProjectIntro project={project}/>
-                    
-                </>
-            }
+            <ProjectIntro project={project}/>
         </div>
     );
 }
@@ -75,12 +70,12 @@ const compress = () => {
     if (jumb) {
         jumb.id = "project-jumbotron-change";
     }
-    let intro = document.getElementById("project-change");
+    let intro = document.getElementById("project-intro");
     if (intro) {
-        intro.classList.remove("opacity-095");
-        intro.classList.add("opacity-06");
+        intro.id = "project-intro-change";
     }
 }
+
 const ProjectIntro = (props) => {
     const [activeTab, setActiveTab] = useState('0');
 
@@ -133,7 +128,7 @@ const ProjectIntro = (props) => {
                     <TabPane tabId="3">
                     <Row>
                         <Col >
-                        <TeamDisplay team={project.members}/>
+                        <TeamDisplay team={project.members} projId={project.id}/>
                         </Col>
                     </Row>
                     </TabPane>
@@ -151,9 +146,9 @@ const ProjectIntro = (props) => {
 
     return (
         <div className="color-change-light">
-            <div id="project-intro" className="color-change opacity-095">
+            <div className="color-change opacity-095">
                 <Header/>
-                <div className="d-flex justify-content-center">
+                <div id="project-intro" className="d-flex justify-content-center">
                     <div id="project-jumbotron">
                         <h1 id="project-name" className="display-3">{props.project.name}</h1>
                         <p className="lead">{props.project.shortDescription}</p>
@@ -168,8 +163,9 @@ const ProjectIntro = (props) => {
 const MoreInfo = (props) => {
     return (<>
         <Row>
-            <Col className="col-6">
-                <div>{props.info}</div>
+            <Col className="col-6 project-info">
+                <h3>Project Description</h3>
+                <div >{props.info}</div>
             </Col>
             <Col className="col-6">
                 <TechnologyDisplay technologies={props.tech}/>
@@ -186,8 +182,10 @@ const TechnologyDisplay = (props) => {
     const TechnologyCard = (props) => {
 
         return <div >
-            <img className="technology-photo" src={props.tech.image}/>
-            <h4>{props.tech.name}</h4>
+            <div className="technology-photo-div">
+                <img className="technology-photo"src={props.tech.image}/>
+            </div>
+            <p>{props.tech.name}</p>
         </div>
     }
 
@@ -201,7 +199,7 @@ const TechnologyDisplay = (props) => {
     return (
         <div>
             <Container className="technology-display">
-                <h2>Tech Stack</h2>
+                <h3>Tech Stack</h3>
                 <Row>
                     {technologyCards}
                 </Row>
@@ -213,13 +211,6 @@ const TechnologyDisplay = (props) => {
 //displays project team
 const TeamDisplay = (props) => {
     //renders individual member card
-    var TeamCard = (props) => {
-        return <> {
-            <div >
-                
-            </div>
-        }</>
-    }
 
     var idArr = props.team;
     const [members, setMembers] = useState([]);
@@ -236,12 +227,14 @@ const TeamDisplay = (props) => {
         let arr = [...Array(idArr.length)];
         for (var i = 0; i < idArr.length; i++) {
             arr[i] = await Axios.get('http://localhost:5000/profiles/' + idArr[i])
-                .then(profile => {
+                .then(async profile => {
                     return {
                         id: idArr[i],
                         firstname: profile.data.firstname,
                         lastname: profile.data.lastname,
                         image: profile.data.image,
+                        role: await Axios.get('http://localhost:5000/profiles/' + idArr[i] + "/" + props.projId)
+                            .then(project => project.data.role)
                     };
                 });
         }
@@ -257,8 +250,8 @@ const TeamDisplay = (props) => {
                     <Col className="col-6 col-lg-4 col-md-3">
                         <Container>
                             <img className="project-member-photo" src={member.image} alt="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></img>
-                            <div>Name: {member.firstname + " " + member.lastname}</div>
-                            <div>Role: </div>
+                            <strong>{member.firstname + " " + member.lastname}</strong>
+                            <div>Role: {member.role}</div>
                             <div>About me: </div>
                             <Link href={"/Profile?id=" + member.id}>
                                 <Button>View Profile</Button>
@@ -282,9 +275,9 @@ const JoinForm = (props) => {
                 <FormGroup>
                 <Label for="exampleText">Name</Label>
                 <Input
-                    type="email"
-                    name="email"
-                    id="exampleEmail"
+                    type="text"
+                    name="text"
+                    id="exampleText"
                 />
                 </FormGroup>
                 <FormGroup>
