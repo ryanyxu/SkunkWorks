@@ -243,10 +243,11 @@ body > * {
 #project-jumbotron-change {
     background: transparent;
     color: white;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 20vw;
+    margin-right: 20vw;
     margin-top: 1%;
-    transition: all 1.2s;
+    transition: all 1s;
+    align-content: left;
 }
 
 ul.nav.nav-tabs {
@@ -254,13 +255,12 @@ ul.nav.nav-tabs {
     justify-content: left;
     align-items: left;
     flex-wrap: wrap;
-    padding-left: 20%;
+    padding-left: 20vw;
 }
 
 .project-info {
     border-right: 1px solid rgb(141, 141, 141);
 }
-
 
 .technology-photo-div {
     height: 5rem;
@@ -300,15 +300,26 @@ ul.nav.nav-tabs {
 
 
 /* profile stuff */
+.profile-padding {
+    padding-left: 20vh;
+    padding-right: 20vh;
+}
 .profile-intro {
-    background-color: rgb(179, 179, 179);
+    background-color: rgb(129, 139, 182);
+    padding-bottom: 3vh;
 }
 .profile-picture {
-    height: 15rem;
-    width: 15rem;
+    width: 30vh;
+    height: auto;
     overflow-y: hidden;
 }
-
+.profile-description {
+    color: white;
+    padding: 2rem;
+}
+.project-involvement {
+    background-color: rgb(233, 236, 250)
+}
 .project-involvement-card {
     margin-top: 2vh;
     margin-left: 0%;
@@ -317,4 +328,19 @@ ul.nav.nav-tabs {
     opacity: .90;
     transition: all .7s;
     max-height: 80vh;
+}
+
+.project-involvement-heading {
+    text-align: center;
+    color: rgb(129, 139, 182)
+}
+
+.profile-form {
+    background-color: rgb(129, 139, 182);
+    color: rgb(233, 236, 250);
+    padding-bottom: 4vh;
+}
+
+.profile-form-header {
+    text-align: center;
 }

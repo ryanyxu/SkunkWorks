@@ -49,7 +49,7 @@ const Profile = () => {
         <>
             {
                 !profile ? <div>profile not found</div> :
-                <>
+                <div>
                     <ProfileIntro image={profile.image} 
                         name={profile.name}
                         email={profile.email}
@@ -57,7 +57,7 @@ const Profile = () => {
                     />
                     <ProjectInvolvement projects={profile.projects}/>
                     <Contact/>
-                </>
+                </div>
             }
         </>
     );
@@ -68,16 +68,18 @@ const ProfileIntro = (props) => {
     return (
         <div className="profile-intro">
             <Header/>
-                <Row>
-                    <Col className="col-12 col-lg-4 col-md-4">
-                        <img className="profile-picture" src={props.image}/>
-                    </Col>
-                    <Col className="col-12 col-lg-8 col-md-8">
+            <Row className="profile-padding">
+                <Col className="col-12 col-lg-4 col-md-4">
+                    <img className="profile-picture" src={props.image}/>
+                </Col>
+                <Col className="col-12 col-lg-8 col-md-8">
+                    <div className="profile-description">
                         <p>{props.name}</p>
                         <p>{props.email}</p>
                         <p>About Me: {props.about}</p>
-                    </Col>
-                </Row>
+                    </div>
+                </Col>
+            </Row>
         </div>
     );
 };
@@ -127,9 +129,9 @@ function ProjectInvolvement(props) {
     }
 
     return (
-        <div className="project-display">
+        <div className="profile-padding project-involvement">
             <Container>
-                <h1>Projects</h1>
+                <h1 className="project-involvement-heading">Projects</h1>
                 <Row>
                     <Col className="col-12 col-lg-4 col-md-6"><ProjectCard project={mockProject("mock1")}/></Col>
                     <Col className="col-12 col-lg-4 col-md-6"><ProjectCard project={mockProject("mock2")}/></Col>
@@ -143,8 +145,8 @@ function ProjectInvolvement(props) {
 //contact form
 const Contact = (props) => {
     return (
-        <div className="form-display">
-            <h1 className="header">Get in Touch!</h1>
+        <div className="profile-form profile-padding">
+            <h2 className="profile-form-header">Contact me</h2>
             <Form className="sign-up">
                 <FormGroup>
                 <Label for="exampleText">Name</Label>
