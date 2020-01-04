@@ -26,9 +26,6 @@ app.use('/projects', projectsRouter);
 app.use('/profiles', profilesRouter);
 
 //For avoidong Heroku $PORT error
-app.get('/', function(request, response) {
-    var result = 'App is running'
-    response.send(result);
-}).listen(port, function() {
+app.listen(port, () => {
     console.log('App is running, server is listening on port ' + port);
 });
