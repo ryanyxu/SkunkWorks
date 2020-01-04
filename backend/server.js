@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || '0.0.0.0';
+const port = process.env.PORT || 5000;
 
 
 app.use(cors());
@@ -25,6 +25,10 @@ const profilesRouter = require('./routes/profiles')
 app.use('/projects', projectsRouter);
 app.use('/profiles', profilesRouter);
 
-app.listen(port, () => {
-    console.log('Server is running on port: ' + port);
+//For avoidong Heroku $PORT error
+app.get('/', function(request, response) {
+    var result = 'App is running'
+    response.send(result);
+}).listen(port, function() {
+    console.log('App is running, server is listening on port ' + port);
 });

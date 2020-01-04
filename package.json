@@ -6,7 +6,6 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "server": "nodemon backend/server.js",
     "heroku-postbuild": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
