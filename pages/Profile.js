@@ -95,6 +95,7 @@ function ProjectInvolvement(props) {
             }
         }
 
+
         return (
             <div>
                 <Card className="project-involvement-card" id={props.project.id + "-card"} onMouseEnter={lift} onMouseLeave={lift}>
@@ -146,7 +147,7 @@ function ProjectInvolvement(props) {
 const Contact = (props) => {
     return (
         <div className="profile-form profile-padding">
-            <h2 className="profile-form-header">Contact me</h2>
+            <h1 className="profile-form-header">Contact me</h1>
             <Form className="sign-up">
                 <FormGroup>
                 <Label for="exampleText">Name</Label>
@@ -168,7 +169,7 @@ const Contact = (props) => {
                 </FormGroup>
                 <FormGroup>
                 </FormGroup>
-                <Button>Submit</Button>
+                <Button className="profile-form-submit">Submit</Button>
             </Form>
         </div>
     );

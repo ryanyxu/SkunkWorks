@@ -67,7 +67,7 @@ const IntroDisplay = () => {
                 </div>
                     <Collapse isOpen={!isOpen}>
                         <div className="d-flex justify-content-center">
-                            <Button outline color="light" size="lg" id="open-project-btn" onClick={toggle}>View Projects</Button>
+                            <Button color="light" size="lg" id="open-project-btn" onClick={toggle}>View Projects</Button>
                         </div>
                     </Collapse>
                     <Collapse isOpen={isOpen}>

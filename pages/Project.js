@@ -38,6 +38,7 @@ function Project() {
         setProject(
             await Axios.get('http://localhost:5000/projects/' + router.query.id)
             .then(project => {
+                console.log(project.data.members);
                 return {
                     id: router.query.id,
                     name: project.data.projectname,
@@ -48,7 +49,7 @@ function Project() {
                         var techImage = tech.image;
                         return {name: techName, image: techImage};
                     }),
-                    members: project.data.members.map(member => member._id),
+                    members: project.data.members,
                 };
             })
         );
@@ -234,7 +235,13 @@ const TeamDisplay = (props) => {
                         lastname: profile.data.lastname,
                         image: profile.data.image,
                         role: await Axios.get('http://localhost:5000/profiles/' + idArr[i] + "/" + props.projId)
-                            .then(project => project.data.role)
+                            .then(project => {
+                                if (project.data) {
+                                    return project.data.role;
+                                }
+                                console.log(project);
+                                return "not found";
+                            })
                     };
                 });
         }
@@ -247,14 +254,16 @@ const TeamDisplay = (props) => {
                 {
                     !members ? <div className="icon"></div> :
                     members.map(member => 
-                    <Col className="col-6 col-lg-4 col-md-3">
-                        <Container>
-                            <img className="project-member-photo" src={member.image} alt="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></img>
+                    <Col className="col-6 col-lg-4 col-md-6">
+                        <Container className="profile-member-card">
+                            <Row>
+                                <img className="project-member-photo" src={member.image} alt=" "></img>
+                            </Row>
                             <strong>{member.firstname + " " + member.lastname}</strong>
                             <div>Role: {member.role}</div>
                             <div>About me: </div>
                             <Link href={"/Profile?id=" + member.id}>
-                                <Button>View Profile</Button>
+                                <Button color="light" size="sm">View Profile</Button>
                             </Link>
                         </Container>
 

@@ -10,13 +10,6 @@ const technologySchema = new Schema({
     },
 });
 
-const memberSchema = new Schema({
-    _id: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-    },
-});
-
 const projectSchema = new Schema({
     projectname: {
         type: String,
@@ -39,7 +32,7 @@ const projectSchema = new Schema({
         required: true,
     },
     members: {
-        type: [memberSchema],
+        type: [String],
     },
     image: {
         type: String,

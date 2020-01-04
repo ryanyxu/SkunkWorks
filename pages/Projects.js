@@ -82,13 +82,13 @@ const ProjectDisplay = () => {
                 </Col>
 
                 <Col className="col-12 col-lg-4 col-md-6 col-sm-6">
-                    <ProjectCard project={mockProject("test1")}/>
+                    <ProjectCard project={mockProject("test3")}/>
                 </Col>
                 <Col className="col-12 col-lg-4 col-md-6 col-sm-6">
-                    <ProjectCard project={mockProject("test2")}/>
+                    <ProjectCard project={mockProject("test4")}/>
                 </Col>
                 <Col className="col-12 col-lg-4 col-md-6 col-sm-6">
-                    <ProjectCard project={mockProject("test1")}/>
+                    <ProjectCard project={mockProject("test5")}/>
                 </Col>
                 {
                     !projects ? <></> :
