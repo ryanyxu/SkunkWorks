@@ -34,7 +34,6 @@ const Home = () => (
     </div>
 ); //<SignUp/>
 
-console.log(process.env.PORT);
 //displays intro screen with jumbotron and description
 const IntroDisplay = () => {
 
