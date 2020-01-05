@@ -6,7 +6,7 @@
     "dev": "nodemon server & next",
     "build": "next build",
     "start": "next start -p $PORT",
-    "heroku-postbuild": "next build",
+    "heroku-postbuild": "next build & node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
