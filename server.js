@@ -19,7 +19,6 @@ const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
 })
-
 const projectsRouter = require('./backend/routes/projects');
 const profilesRouter = require('./backend/routes/profiles')
 app.use('/projects', projectsRouter);
