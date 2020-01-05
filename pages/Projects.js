@@ -25,7 +25,7 @@ const ProjectDisplay = () => {
     //retrieve projects from server
     const getProjects = async () => {
         setProjects(
-            await Axios.get('http://localhost:5000/projects/')
+            await Axios.get('/projects/')
             .then(response => {
                 return response.data.map(project => new Object({ //possibly make project object later
                         id: project._id.toString(),

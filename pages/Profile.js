@@ -32,7 +32,7 @@ const Profile = () => {
     }, [profile]);
 
     const getProfile = async () => {
-        let res = await Axios.get('http://localhost:5000/profiles/' + router.query.id)
+        let res = await Axios.get('/profiles/' + router.query.id)
             .then(profile => {
                 let obj = {
                     name: profile.data.firstname + " " + profile.data.lastname,
