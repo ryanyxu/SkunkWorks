@@ -90,8 +90,13 @@ body > * {
 /* Home */
 
 #home-background {
-    background-image: url("https://media.licdn.com/dms/image/C511BAQE01Nz-hKBHZQ/company-background_10000/0?e=1577491200&v=beta&t=JvZ3KpWc7Pb6v2P646OTNq2qmOwhXCuUJC6ucRKCd88");
-    
+    /*background-image: url("https://i.postimg.cc/j5GWs07q/Volen-Center-for-Complex-Systems-Brandeis-University-Waltham-M.jpg");
+    */
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/a/ab/Volen_Center_for_Complex_Systems%2C_Brandeis_University%2C_Waltham_MA.jpg");
+
+    /*
+    background: url(/static/background.jpg);
+    */
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
