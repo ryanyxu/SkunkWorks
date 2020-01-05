@@ -95,7 +95,7 @@ body > * {
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/a/ab/Volen_Center_for_Complex_Systems%2C_Brandeis_University%2C_Waltham_MA.jpg");
 
     /*
-    background: url(/static/background.jpg);
+    background: url(/public/background.jpg);
     */
     background-attachment: fixed;
     background-repeat: no-repeat;
