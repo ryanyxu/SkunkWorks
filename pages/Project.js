@@ -13,7 +13,6 @@ import {useRouter} from 'next/router';
 import Axios from 'axios';
 import Header from '../comps/Header';
 import classnames from 'classnames';
-import ProjectDisplay from './Projects';
 //displays individual project
 function Project() {
     const router = useRouter();
