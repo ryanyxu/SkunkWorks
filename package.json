@@ -4,10 +4,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server & next",
-    "build": "next build",
-    "start": "next start -p $PORT",
     "heroku-postbuild": "next build",
-    "server": "node server",
+    "start": "node server.js",
+    "server": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
