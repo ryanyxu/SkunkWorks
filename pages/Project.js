@@ -226,14 +226,14 @@ const TeamDisplay = (props) => {
     const getTeam = async () => {
         let arr = [...Array(idArr.length)];
         for (var i = 0; i < idArr.length; i++) {
-            arr[i] = await Axios.get('/profiles/' + idArr[i])
+            arr[i] = await Axios.get('https://brandeisskunkworks.herokuapp.com:8080/profiles/' + idArr[i])
                 .then(async profile => {
                     return {
                         id: idArr[i],
                         firstname: profile.data.firstname,
                         lastname: profile.data.lastname,
                         image: profile.data.image,
-                        role: await Axios.get('/profiles/' + idArr[i] + "/" + props.projId)
+                        role: await Axios.get('https://brandeisskunkworks.herokuapp.com:8080/profiles/' + idArr[i] + "/" + props.projId)
                             .then(project => {
                                 if (project.data) {
                                     return project.data.role;
