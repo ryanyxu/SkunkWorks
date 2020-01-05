@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server & next",
-    "build": "next build & node server",
-    "start": "next start -p $PORT",
+    "build": "next build",
+    "start": "next start -p $PORT & node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
