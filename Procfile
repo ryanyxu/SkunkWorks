@@ -1,1 +1,1 @@
-web: next start -p $PORT & npm run server
+web: npm run server & next start -p $PORT

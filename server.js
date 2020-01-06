@@ -22,10 +22,8 @@ connection.once('open', () => {
 })
 const projectsRouter = require('./backend/routes/projects');
 const profilesRouter = require('./backend/routes/profiles')
-const Home = require('./pages/Home');
 app.use('/projects', projectsRouter);
 app.use('/profiles', profilesRouter);
-app.use('/', Home);
 
 
 //For avoidong Heroku $PORT error
