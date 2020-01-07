@@ -112,8 +112,8 @@ body > * {
     color: rgb(32, 32, 32);
     width: 100%;
     height: 100%;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 20vw;
+    margin-right: 20vw;
     margin-top: 8%;
     margin-bottom: 10%;
     display: flex;
@@ -121,29 +121,39 @@ body > * {
     transition: all 1.2s;
 }
 
+#home-jumbotron-title {
+    font-size: 5vw;
+}
+#home-jumbotron-text-1 {
+    font-size: 2vw;
+}
+#home-jumbotron-text-2 {
+    font-size: 1.7vw;
+}
+
+
 #whitespace {
-    height: 8vh;
+    min-height: 4vmax;
     background-color: rgb(237,234,234);
     text-align: center;
-    font-size: 3rem;
+    font-size: 4vmax;
     color: rgb(57,57,57);
 }
 
 .project-display {
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: 15vw;
+    padding-right: 15vw;
     width: 100%;
     background-color: rgb(184, 226, 220);
 }
 
 .project-card {
     margin-top: 2vh;
-    margin-left: 0%;
-    margin-right: 0%;
+    margin-left: 1vw;
+    margin-right: 1vw;
     margin-bottom: 2vh;
     opacity: .90;
     transition: all .7s;
-    max-height: 41vh;
 }
 .card-shadow {
     opacity: 1;
@@ -152,11 +162,13 @@ body > * {
 }
 
 .nav > a{
-    background-color: transparent;
     color: white;
 }
 
 .navbar-toggler-icon {
+    color: white;
+}
+.nav > button > span{
     color: white;
 }
 .nav-item > a {

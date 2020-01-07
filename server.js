@@ -10,9 +10,8 @@ const port = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.ATLAS_URI;
 
-console.log("URI: " + uri);
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 

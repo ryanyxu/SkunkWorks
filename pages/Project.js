@@ -35,9 +35,9 @@ function Project() {
     //get project from server
     const getProject = async () => {
         setProject(
-            await Axios.get('/profiles/' + router.query.id)
+            await Axios.get('http://localhost:8080'+'/projects/' + router.query.id)
             .then(project => {
-                console.log(project.data.members);
+                console.log('http://localhost:8080'+'/projects/' + router.query.id);
                 return {
                     id: router.query.id,
                     name: project.data.projectname,
@@ -226,19 +226,18 @@ const TeamDisplay = (props) => {
     const getTeam = async () => {
         let arr = [...Array(idArr.length)];
         for (var i = 0; i < idArr.length; i++) {
-            arr[i] = await Axios.get('/profiles/' + idArr[i])
+            arr[i] = await Axios.get('http://localhost:8080'+'/profiles/' + idArr[i])
                 .then(async profile => {
                     return {
                         id: idArr[i],
                         firstname: profile.data.firstname,
                         lastname: profile.data.lastname,
                         image: profile.data.image,
-                        role: await Axios.get('/profiles/' + idArr[i] + "/" + props.projId)
+                        role: await Axios.get('http://localhost:8080'+'/profiles/' + idArr[i] + "/" + props.projId)
                             .then(project => {
                                 if (project.data) {
                                     return project.data.role;
                                 }
-                                console.log(project);
                                 return "not found";
                             })
                     };
@@ -277,9 +276,22 @@ const TeamDisplay = (props) => {
 
 ///form for joining project
 const JoinForm = (props) => {
+    //unfinihsed system for submission
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [role, setRole] = useState("");
+    const [info, setInfo] = useState("");
+    const handleNameChange = (e) => setName(e.target.value);
+    const handleEmailChange = (e) => setEmail(e.target.value);
+    const handleRoleChange = (e) => setRole(e.target.value);
+    const handleInfoChange = (e) => setInfo(e.target.value);
+    const onSubmit = (e) => {
+        e.preventDefault();
+        Axios.post('http://localhost:8080'+'responses' + idArr[i]) 
+    }
     return (
         <div className="project-form">
-            <Form className="sign-up">
+            <Form className="sign-up" onSubmit={}>
                 <FormGroup>
                 <Label for="exampleText">Name</Label>
                 <Input
@@ -303,6 +315,7 @@ const JoinForm = (props) => {
                     <option>Project Manager</option>
                     <option>Developer</option>
                     <option>Designer</option>
+                    <option>Other (please specify below)</option>
                 </Input>
                 </FormGroup>
                 <FormGroup>

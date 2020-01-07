@@ -57,11 +57,10 @@ const IntroDisplay = () => {
                 <Header/>
                 <div className="d-flex justify-content-center" >
                     <Jumbotron id="home-jumbotron">
-                        <h1 className="display-3">SkunkWorks</h1>
-                        <p className="lead">Start a project.   Join a team.   Build a community.</p>
+                        <h1 id="home-jumbotron-title" className="display-3">SkunkWorks</h1>
+                        <p id="home-jumbotron-text-1" className="lead">Start a project.   Join a team.   Build a community.</p>
                         <hr className="my-2"/>
-                        <br></br>
-                        <p>Work on something you're proud of.</p>
+                        <p id="home-jumbotron-text-2" className="lead">Work on something you're proud of.</p>
                     </Jumbotron>
                 </div>
                     <Collapse isOpen={!isOpen}>
@@ -93,7 +92,7 @@ const ProjectDisplay = () => {
     //retrieve projects from server
     const getProjects = async () => {
         setProjects(
-            await Axios.get('/projects/')
+            await Axios.get('http://localhost:8080'+'/projects/')
             .then(response => {
                 return response.data.map(project => new Object({ //possibly make project object later
                         id: project._id.toString(),
@@ -142,30 +141,30 @@ const ProjectDisplay = () => {
     return (
         <div className="project-display">
             <Row>
-                <Col className="col-12 col-lg-4 col-md-6 col-sm-6">
-                    <ProjectCard project={mockProject("test1")}/>
-                </Col>
-                <Col className="col-12 col-lg-4 col-md-6 col-sm-6">
-                    <ProjectCard project={mockProject("test2")}/>
-                </Col>
-
-                <Col className="col-12 col-lg-4 col-md-6 col-sm-6">
-                    <ProjectCard project={mockProject("test3")}/>
-                </Col>
-                <Col className="col-12 col-lg-4 col-md-6 col-sm-6">
-                    <ProjectCard project={mockProject("test4")}/>
-                </Col>
-                <Col className="col-12 col-lg-4 col-md-6 col-sm-6">
-                    <ProjectCard project={mockProject("test5")}/>
-                </Col>
                 {
                     !projects ? <></> :
                     projects.map(project => {
-                        return(<Col className="col-12 col-lg-4 col-md-6 col-sm-6">
+                        return(<Col className="col-6 col-lg-4">
                             <ProjectCard project={project}/>
                         </Col>);
                     })
                 }
+                <Col className="col-6 col-lg-4">
+                    <ProjectCard project={mockProject("test1")}/>
+                </Col>
+                <Col className="col-6 col-lg-4">
+                    <ProjectCard project={mockProject("test2")}/>
+                </Col>
+
+                <Col className="col-6 col-lg-4">
+                    <ProjectCard project={mockProject("test3")}/>
+                </Col>
+                <Col className="col-6 col-lg-4">
+                    <ProjectCard project={mockProject("test4")}/>
+                </Col>
+                <Col className="col-6 col-lg-4">
+                    <ProjectCard project={mockProject("test5")}/>
+                </Col>
             </Row>
         </div>
     );
