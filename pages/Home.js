@@ -118,7 +118,7 @@ const ProjectDisplay = () => {
                     <Card className="project-card" id={props.project.id + "-card"} onMouseEnter={lift} onMouseLeave={lift}>
                         <CardImg top width="100%" src={props.project.image} />
                         <CardBody>
-                        <CardTitle>{props.project.name}</CardTitle>
+                        <CardTitle className="project-card-name lead">{props.project.name}</CardTitle>
                         </CardBody>
                     </Card>
                 </Link>

@@ -86,22 +86,26 @@ body > * {
   flex-shrink: 0;
 }
 
+body:after{
+    content:"";
+    position:fixed; /* stretch a fixed position to the whole screen */
+    top:0;
+    height:100vh; /* fix for mobile browser address bar appearing disappearing */
+    left:0;
+    right:0;
+    z-index:-1; /* needed to keep in the background */
+    background: url("https://upload.wikimedia.org/wikipedia/commons/a/ab/Volen_Center_for_Complex_Systems%2C_Brandeis_University%2C_Waltham_MA.jpg") center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 
 /* Home */
 
 #home-background {
-    /*background-image: url("https://i.postimg.cc/j5GWs07q/Volen-Center-for-Complex-Systems-Brandeis-University-Waltham-M.jpg");
-    */
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/a/ab/Volen_Center_for_Complex_Systems%2C_Brandeis_University%2C_Waltham_MA.jpg");
-
-    /*
-    background: url(/public/background.jpg);
-    */
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%;
     width: 100%;
+    min-height: 100%;
 }
 
 #home {
@@ -120,7 +124,7 @@ body > * {
     width: 100%;
     height: 100%;
     margin-left: 5vw;
-    margin-top: 30vh;
+    margin-top: 29vh;
     margin-bottom: 7vh;
     transition: all 1.2s;
 }
@@ -153,7 +157,7 @@ body > * {
     min-height: 3vmin;
     background-color: rgb(237,234,234);
     text-align: center;
-    font-size: 5vmin;
+    font-size: 5.4vmin;
     color: rgb(57,57,57);
 }
 
@@ -174,6 +178,10 @@ body > * {
     margin-bottom: 2vh;
     opacity: .90;
     transition: all .7s;
+}
+
+.project-card-name {
+    font-size: 2.7vmin;
 }
 .card-shadow {
     opacity: 1;
