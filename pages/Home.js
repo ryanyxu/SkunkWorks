@@ -28,7 +28,7 @@ import Header from '../comps/Header';
 
  //displays home page
 const Home = () => (
-    <div> 
+    <div className="lead"> 
         <IntroDisplay/>
     </div>
 ); //<SignUp/>
@@ -47,7 +47,7 @@ const IntroDisplay = () => {
 
         var Scroll = require('react-scroll');
         var scroll = Scroll.animateScroll;
-        scroll.scrollTo(800);
+        scroll.scrollTo(document.getElementById("home-background").getBoundingClientRect().bottom);
         //window.scrollHeight
         //window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
     }
@@ -58,7 +58,7 @@ const IntroDisplay = () => {
             <div className="d-flex justify-content-center" >
                 <div id="home-jumbotron">
                     <h1 id="home-jumbotron-title" className="display-3">SkunkWorks</h1>
-                    <p id="" className="lead home-jumbotron-text">Build something you're proud of</p>
+                    <p id="" className="home-jumbotron-text">Build something you're proud of</p>
                 </div>
             </div>
             <Collapse isOpen={!isOpen}>
@@ -71,7 +71,7 @@ const IntroDisplay = () => {
             </Collapse>
         </div>
         <Collapse isOpen={isOpen}>
-            <div id="whitespace" className="lead">Projects</div>
+            <div id="whitespace">Projects</div>
             <ProjectDisplay/>
         </Collapse>
         </>
@@ -118,7 +118,7 @@ const ProjectDisplay = () => {
                     <Card className="project-card" id={props.project.id + "-card"} onMouseEnter={lift} onMouseLeave={lift}>
                         <CardImg top width="100%" src={props.project.image} />
                         <CardBody>
-                        <CardTitle className="project-card-name lead">{props.project.name}</CardTitle>
+                        <CardTitle className="project-card-name">{props.project.name}</CardTitle>
                         </CardBody>
                     </Card>
                 </Link>

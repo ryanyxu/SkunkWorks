@@ -55,7 +55,7 @@ function Project() {
     };
 
     return (
-        <div id="project">
+        <div id="project" className="lead">
             <ProjectIntro project={project}/>
         </div>
     );
@@ -90,21 +90,21 @@ const ProjectIntro = (props) => {
         return <Nav tabs className="project-tabs">
         <NavItem>
           <NavLink
-            className={classnames({ active: activeTab === '1' })}
+            className={"tab-name" + classnames({ active: activeTab === '1' })}
             onClick={() => { toggle('1'); }}>
               Learn More
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink
-            className={classnames({ active: activeTab === '3' })}
+            className={"tab-name" + classnames({ active: activeTab === '3' })}
             onClick={() => { toggle('3'); }}>
             Team Members
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink
-            className={classnames({ active: activeTab === '4' })}
+            className={"tab-name" + classnames({ active: activeTab === '4' })}
             onClick={() => { toggle('4'); }}
           >
             Join Us
@@ -116,7 +116,7 @@ const ProjectIntro = (props) => {
     const tabContents = (project) => {
         return (
             <Collapse className="project-content" isOpen={isOpen}>
-                <TabContent activeTab={activeTab}>
+                <TabContent activeTab={activeTab} >
                     <TabPane tabId="1">
                     <Row>
                         <Col >
@@ -146,12 +146,12 @@ const ProjectIntro = (props) => {
 
     return (
         <div className="color-change-light">
-            <div className="color-change opacity-095">
+            <div className="color-change">
                 <Header/>
-                <div id="project-intro" className="d-flex justify-content-center">
+                <div id="project-intro">
                     <div id="project-jumbotron">
-                        <h1 id="project-name" className="display-3">{props.project.name}</h1>
-                        <p className="lead">{props.project.shortDescription}</p>
+                        <p className="project-name">{props.project.name}</p>
+                        <p className="project-short">{props.project.shortDescription}</p>
                     </div>
                 </div>
                 {tabs()}
@@ -163,9 +163,9 @@ const ProjectIntro = (props) => {
 const MoreInfo = (props) => {
     return (<>
         <Row>
-            <Col className="col-6 project-info">
-                <h3>Project Description</h3>
-                <div >{props.info}</div>
+            <Col className="col-6 project-info-div">
+                <p className="project-category-header">Project Description</p>
+                <p className="project-info">{props.info}</p>
             </Col>
             <Col className="col-6">
                 <TechnologyDisplay technologies={props.tech}/>
@@ -185,7 +185,7 @@ const TechnologyDisplay = (props) => {
             <div className="technology-photo-div">
                 <img className="technology-photo"src={props.tech.image}/>
             </div>
-            <p>{props.tech.name}</p>
+            <p className="technology-photo-name">{props.tech.name}</p>
         </div>
     }
 
@@ -199,7 +199,7 @@ const TechnologyDisplay = (props) => {
     return (
         <div>
             <Container className="technology-display">
-                <h3>Tech Stack</h3>
+                <p className="project-category-header">Tech Stack</p>
                 <Row>
                     {technologyCards}
                 </Row>
@@ -253,7 +253,7 @@ const TeamDisplay = (props) => {
                     !members ? <div className="icon"></div> :
                     members.map(member => 
                     <Col className="col-6 col-lg-4 col-md-6">
-                        <Container className="profile-member-card">
+                        <div className="profile-member-card">
                             <Row>
                                 <img className="project-member-photo" src={member.image} alt=" "></img>
                             </Row>
@@ -261,9 +261,9 @@ const TeamDisplay = (props) => {
                             <div>Role: {member.role}</div>
                             <div>About me: </div>
                             <Link href={"/Profile?id=" + member.id}>
-                                <Button color="light" size="sm">View Profile</Button>
+                                <Button size="sm" >View Profile</Button>
                             </Link>
-                        </Container>
+                        </div>
 
                     </Col>
                     )
@@ -290,8 +290,8 @@ const JoinForm = (props) => {
         Axios.post('http://localhost:8080'+'responses' + idArr[i]) 
     }
     return (
-        <div className="project-form">
-            <Form className="sign-up" >
+        <div >
+            <Form className="project-form">
                 <FormGroup>
                 <Label for="exampleText">Name</Label>
                 <Input

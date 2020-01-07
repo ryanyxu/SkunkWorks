@@ -20,11 +20,11 @@
 */
 @keyframes colorchange
 {
-    0%   {background: rgba(104, 129, 172, var(--colorOpacity));}
-    25%  {background: rgb(81, 139, 188, var(--colorOpacity));}
-    50%  {background: rgb(83, 119, 177, var(--colorOpacity));}
-    75%  {background: rgb(126, 121, 179, var(--colorOpacity));}
-    100% {background: rgb(104, 129, 172, var(--colorOpacity));}
+    0%   {background: rgb(104, 129, 172);}
+    25%  {background: rgb(81, 139, 188);}
+    50%  {background: rgb(83, 119, 177);}
+    75%  {background: rgb(126, 121, 179);}
+    100% {background: rgb(104, 129, 172);}
 }
 @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
 {
@@ -36,19 +36,19 @@
 }
 @keyframes colorchange-light
 {
-    0%   {background: rgba(104, 129, 172, var(--colorOpacity-light));}
-    25%  {background: rgb(81, 139, 188, var(--colorOpacity-light));}
-    50%  {background: rgb(83, 119, 177, var(--colorOpacity-light));}
-    75%  {background: rgb(126, 121, 179, var(--colorOpacity-light));}
-    100% {background: rgb(104, 129, 172, var(--colorOpacity-light));}
+    0%   {background: rgb(203, 215, 235);}
+    25%  {background: rgb(181, 208, 230);}
+    50%  {background: rgb(183, 201, 230);}
+    75%  {background: rgb(208, 206, 233);}
+    100% {background: rgb(203, 215, 235);}
 }
 @-webkit-keyframes colorchange-light /* Safari and Chrome - necessary duplicate */
 {
-    0%   {background: rgba(104, 129, 172, var(--colorOpacity-light));}
-    25%  {background: rgb(81, 139, 188, var(--colorOpacity-light));}
-    50%  {background: rgb(83, 119, 177, var(--colorOpacity-light));}
-    75%  {background: rgb(126, 121, 179, var(--colorOpacity-light));}
-    100% {background: rgb(104, 129, 172, var(--colorOpacity-light));}
+    0%   {background: rgb(203, 215, 235);}
+    25%  {background: rgb(181, 208, 230);}
+    50%  {background: rgb(183, 201, 230);}
+    75%  {background: rgb(208, 206, 233);}
+    100% {background: rgb(203, 215, 235);}
 }
 
 .color-change {
@@ -63,6 +63,7 @@
     -webkit-animation: colorchange-light 20s infinite; /* Chrome and Safari */
     flex-grow: 1;
     transition: all 1s;
+    height: 100%;
 }
 
 .transparent {
@@ -86,19 +87,19 @@ body > * {
   flex-shrink: 0;
 }
 
-body:after{
+body{
     content:"";
-    position:fixed; /* stretch a fixed position to the whole screen */
     top:0;
     height:100vh; /* fix for mobile browser address bar appearing disappearing */
     left:0;
     right:0;
     z-index:-1; /* needed to keep in the background */
-    background: url("https://upload.wikimedia.org/wikipedia/commons/a/ab/Volen_Center_for_Complex_Systems%2C_Brandeis_University%2C_Waltham_MA.jpg") center center;
+    background: url("https://upload.wikimedia.org/wikipedia/commons/a/ab/Volen_Center_for_Complex_Systems%2C_Brandeis_University%2C_Waltham_MA.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    overflow-y: scroll;
 }
 
 /* Home */
@@ -133,7 +134,7 @@ body:after{
     font-size: 9vmin;
 }
 .home-jumbotron-text {
-    font-size: 3vmin;
+    font-size: 3.5vmin;
 }
 
 .project-btn {
@@ -173,16 +174,14 @@ body:after{
     max-height: 90%;
     max-width: 90%;
     margin-top: 2vh;
-    margin-left: .5vw;
-    margin-right: .5vw;
+    margin-left: .3vw;
+    margin-right: .3vw;
     margin-bottom: 2vh;
     opacity: .90;
     transition: all .7s;
-}
-
-.project-card-name {
     font-size: 2.7vmin;
 }
+
 .card-shadow {
     opacity: 1;
     box-shadow: 0 20px 30px rgba(0,0,0,0.8);
@@ -240,47 +239,37 @@ body:after{
 #__next {
     height: 100%;
 }
-.opacity-095 {
-    opacity: 1;
-}
-.opacity-06 {
-    opacity: 1;
-}
-
 #project {
     display: flex;
     flex-direction: column;
     height: 100%;
+    position: fixed;
 }
 
 #project-intro {
     display: flex;
     flex-direction: column;
-    height: 77vh;
-    transition: all 1.2s;
+    height: 70vh;
+    transition: all .9s;
 }
 
 #project-intro-change {
     height: 18vh;
-    transition: all 1.2s;
+    transition: all .9s;
 }
 
 #project-jumbotron {
     background: transparent;
     color: white;
-    width: 100%;
-    height: 100%;
-    margin-left: 20vw;
-    margin-right: 20vw;
-    margin-top: 26vh;
+    width: 70vw;
+    height: 80%;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    margin-top: 20vh;
     margin-bottom: 10vh;
     display: flex;
     flex-direction: column;
-    transition: all 1.2s;
-}
-
-#project-jumbotron-change > #project-name {
-    font-size: 3rem;
+    transition: all .9s;
 }
 
 #project-jumbotron-change {
@@ -289,7 +278,7 @@ body:after{
     margin-left: 20vw;
     margin-right: 20vw;
     margin-top: 1%;
-    transition: all 1s;
+    transition: all .9s;
     align-content: left;
 }
 
@@ -301,33 +290,71 @@ ul.nav.nav-tabs {
     padding-left: 20vw;
 }
 
-.project-info {
+.tab-nameactive {
+    background: rgba(0, 0, 0, 0.1);
+    font-size: 2vmin;
+}
+
+.tab-name {
+    font-size: 2vmin;
+}
+
+.project-name {
+    font-size: 7vmin;
+    transition: .9s;
+}
+
+.project-short {
+    font-size: 3vmin;
+    transition: .9s;
+}
+
+#project-jumbotron-change > .project-name {
+    font-size: 5vmin;
+}
+
+#project-jumbotron-change > .project-short {
+    font-size: 2vmin;
+}
+
+.project-info-div {
     border-right: 1px solid rgb(141, 141, 141);
 }
 
+.project-category-header {
+    font-size: 3.5vmin;
+}
+
+.project-info {
+    font-size: 2vmin;
+}
+
 .technology-photo-div {
-    height: 5rem;
-    width: 5rem;
-    border-radius: 1rem;
-    border: 1px solid rgb(194, 194, 194);
-    padding-left: 1vh;
-    padding-right: 1vh;
+    height: 5vmax;
+    width: 5vmax;
+    border-radius: 1vmin;
+    border: 1px solid rgba(0, 0, 0, 0.473);
+    padding-left: 1vmin;
+    padding-right: 1vmin;
+    background-color: rgba(0, 0, 0, 0.014);
 }
 
 .technology-photo {
     max-width: 100%;
     max-height: 100%;
     align-content: center;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+}
+.technology-photo-name {
+    font-size: 2.2vmin;
 }
 
-.project-content {
+/* be careful changing height here */
+.tab-content {
     padding-top: 2%;
     padding-left: 20vw;
     padding-right: 20vw;
-    flex-grow: 1;
+    overflow: scroll;
+    height: 65vh;
 }
 
 .project-member-photo {
@@ -343,7 +370,17 @@ ul.nav.nav-tabs {
 
 .profile-member-card {
     margin-bottom: 2vw;
+    font-size: 2vmin;
 }
+
+.project-form {
+    font-size: 1.9vmin;
+}
+
+.project-form > button {
+    font-size: 1.9vmin;
+}
+
 
 /* profile stuff */
 .profile-padding {
