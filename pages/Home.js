@@ -47,36 +47,34 @@ const IntroDisplay = () => {
 
         var Scroll = require('react-scroll');
         var scroll = Scroll.animateScroll;
-        scroll.scrollToBottom();
+        scroll.scrollTo(800);
         //window.scrollHeight
         //window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
     }
     return (
+        <>
         <div id="home-background">
-            <div id="home">
-                <Header/>
-                <div className="d-flex justify-content-center" >
-                    <Jumbotron id="home-jumbotron">
-                        <h1 id="home-jumbotron-title" className="display-3">SkunkWorks</h1>
-                        <p id="home-jumbotron-text-1" className="lead">Start a project.   Join a team.   Build a community.</p>
-                        <hr className="my-2"/>
-                        <p id="home-jumbotron-text-2" className="lead">Work on something you're proud of.</p>
-                    </Jumbotron>
+            <Header/>
+            <div className="d-flex justify-content-center" >
+                <div id="home-jumbotron">
+                    <h1 id="home-jumbotron-title" className="display-3">SkunkWorks</h1>
+                    <p id="" className="lead home-jumbotron-text">Build something you're proud of</p>
                 </div>
-                    <Collapse isOpen={!isOpen}>
-                        <div className="d-flex justify-content-center">
-                            <Button color="light" size="lg" id="open-project-btn" onClick={toggle}>View Projects</Button>
-                        </div>
-                    </Collapse>
-                    <Collapse isOpen={isOpen}>
-                        <div className="arrow bounce d-flex justify-content-center" onClick={scrollDown}></div>
-                    </Collapse>
             </div>
+            <Collapse isOpen={!isOpen}>
+                <div className="d-flex justify-content-center">
+                    <Button className="project-btn" size="lg" onClick={toggle}>View Projects</Button>
+                </div>
+            </Collapse>
             <Collapse isOpen={isOpen}>
-                <div id="whitespace">Projects</div>
-                <ProjectDisplay/>
+                <div className="d-flex justify-content-center arrow bounce" onClick={scrollDown}></div>
             </Collapse>
         </div>
+        <Collapse isOpen={isOpen}>
+            <div id="whitespace" className="lead">Projects</div>
+            <ProjectDisplay/>
+        </Collapse>
+        </>
     );
 };
 
@@ -154,6 +152,16 @@ const ProjectDisplay = () => {
                 </Col>
                 <Col className="col-6 col-lg-4">
                     <ProjectCard project={mockProject("test2")}/>
+                </Col>
+
+                <Col className="col-6 col-lg-4">
+                    <ProjectCard project={mockProject("test3")}/>
+                </Col>
+                <Col className="col-6 col-lg-4">
+                    <ProjectCard project={mockProject("test4")}/>
+                </Col>
+                <Col className="col-6 col-lg-4">
+                    <ProjectCard project={mockProject("test5")}/>
                 </Col>
 
                 <Col className="col-6 col-lg-4">

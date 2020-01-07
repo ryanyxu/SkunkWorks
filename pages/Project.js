@@ -291,7 +291,7 @@ const JoinForm = (props) => {
     }
     return (
         <div className="project-form">
-            <Form className="sign-up" onSubmit={}>
+            <Form className="sign-up" >
                 <FormGroup>
                 <Label for="exampleText">Name</Label>
                 <Input

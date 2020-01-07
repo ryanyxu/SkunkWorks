@@ -100,43 +100,60 @@ body > * {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100%;
+    width: 100%;
 }
 
 #home {
-    padding-bottom: 6%;
+    padding-bottom: 0;
+}
+
+#__next > div {
+    height: 100%;
+    width: 100%;
 }
 
 
 #home-jumbotron {
-    background: rgba(255, 255, 255, 0.8);
-    color: rgb(32, 32, 32);
+    background: rgba(255, 255, 255, 0);
+    color: white;
     width: 100%;
     height: 100%;
-    margin-left: 20vw;
-    margin-right: 20vw;
-    margin-top: 8%;
-    margin-bottom: 10%;
-    display: flex;
-    flex-direction: column;
+    margin-left: 5vw;
+    margin-top: 30vh;
+    margin-bottom: 7vh;
     transition: all 1.2s;
 }
 
 #home-jumbotron-title {
-    font-size: 5vw;
+    font-size: 9vmin;
 }
-#home-jumbotron-text-1 {
-    font-size: 2vw;
-}
-#home-jumbotron-text-2 {
-    font-size: 1.7vw;
+.home-jumbotron-text {
+    font-size: 3vmin;
 }
 
+.project-btn {
+    background: rgba(189, 189, 189, 0.25);
+    color: white;
+    border-color: white;
+    align-self: center;
+    transition: all .5s;
+    font-size: 3vmin;
+    position: absolute;
+    bottom: 10vh;
+}
+
+
+.project-btn:hover {
+    background-color: rgba(189, 189, 189, 0.6);
+    border-color: white;
+}
 
 #whitespace {
-    min-height: 4vmax;
+    min-height: 3vmin;
     background-color: rgb(237,234,234);
     text-align: center;
-    font-size: 4vmax;
+    font-size: 5vmin;
     color: rgb(57,57,57);
 }
 
@@ -144,13 +161,16 @@ body > * {
     padding-left: 15vw;
     padding-right: 15vw;
     width: 100%;
+    height: 100%;
     background-color: rgb(184, 226, 220);
 }
 
 .project-card {
+    max-height: 90%;
+    max-width: 90%;
     margin-top: 2vh;
-    margin-left: 1vw;
-    margin-right: 1vw;
+    margin-left: .5vw;
+    margin-right: .5vw;
     margin-bottom: 2vh;
     opacity: .90;
     transition: all .7s;
@@ -177,9 +197,9 @@ body > * {
 
 /* all for arrow bounce */
 .arrow {
-  position: relative;
-  bottom: -2rem;
+  position: absolute;
   left: 50%;
+  bottom: 10vh;
   margin-left:-20px;
   width: 40px;
   height: 40px;
