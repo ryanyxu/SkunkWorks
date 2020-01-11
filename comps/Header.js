@@ -14,7 +14,6 @@ import {
   DropdownMenu,
   DropdownItem,
   NavbarText,
-
 } from 'reactstrap';
 
 const Header = () => {

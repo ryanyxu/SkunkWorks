@@ -1,6 +1,10 @@
 @import
 'node_modules/bootstrap/dist/css/bootstrap.css';
 
+#Admin {
+    background: white;
+    padding: 10%;
+}
 
 :root {
     --color1: rgb(231, 113, 125);
@@ -100,6 +104,7 @@ body{
     -o-background-size: cover;
     background-size: cover;
     overflow-y: scroll;
+    background-repeat: no-repeat;
 }
 
 /* Home */
