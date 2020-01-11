@@ -13,7 +13,6 @@ router.route('/add').post((req, res) => {
     const projectname = req.body.projectname;
     const shortdescription = req.body.shortdescription;
     const longdescription = req.body.longdescription;
-    const duration = req.body.longdescription;
     const technologies = req.body.technologies;
     const members = req.body.members;
     const image = req.body.image;
@@ -22,7 +21,6 @@ router.route('/add').post((req, res) => {
         projectname,
         shortdescription,
         longdescription,
-        duration,
         technologies,
         members,
         image,
@@ -55,7 +53,6 @@ router.route('/update/:id').post((req, res) => {
             project.projectname = req.body.projectname;
             project.shortdescription = req.body.shortdescription;
             project.longdescription = req.body.longdescription;
-            project.duration = req.body.longdescription;
             project.technologies = req.body.technologies;
             project.members = req.body.members;
             project.image = req.body.image;

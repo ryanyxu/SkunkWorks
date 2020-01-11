@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const profileProjectSchema = new Schema({
     _id: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
     },
     role: {

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
+//put back to technologies if needed
 const technologySchema = new Schema({
     technology: {
         type: String,
@@ -28,7 +29,7 @@ const projectSchema = new Schema({
         required: true,
     },
     technologies: {
-        type: [technologySchema],
+        type: Array,
         required: true,
     },
     members: {
