@@ -8,7 +8,8 @@
     "start": "next start -p $PORT",
     "heroku-postbuild": "next build",
     "server": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "next export"
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",

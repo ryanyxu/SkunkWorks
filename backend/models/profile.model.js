@@ -15,6 +15,9 @@ const profileProjectSchema = new Schema({
     },
     projectname: {
         type: String,
+    },
+    image: {
+        type: String
     }
 });
 

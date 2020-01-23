@@ -119,6 +119,7 @@ function ProjectInvolvement(props) {
             <Col className="col-12 col-lg-4 col-md-6"><ProjectCard project={project}/></Col>
         );
     });
+    /*
     var mockProject = (id) => {
         return {
             id: id,
@@ -128,14 +129,13 @@ function ProjectInvolvement(props) {
             image: "https://www.netclipart.com/pp/m/179-1791305_1-6-meet-schedule-mark-your-calendar-icon.png",
         }
     }
+    */
 
     return (
         <div className="profile-padding project-involvement">
             <Container>
                 <h1 className="project-involvement-heading">Projects</h1>
                 <Row>
-                    <Col className="col-12 col-lg-4 col-md-6"><ProjectCard project={mockProject("mock1")}/></Col>
-                    <Col className="col-12 col-lg-4 col-md-6"><ProjectCard project={mockProject("mock2")}/></Col>
                     {projectCards}
                 </Row>
             </Container>
