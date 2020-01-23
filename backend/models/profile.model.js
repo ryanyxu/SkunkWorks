@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const profileProjectSchema = new Schema({
     _id: {
         type: String,
-        required: true,
+        required: false,
     },
     role: {
         type: String,
@@ -20,6 +20,10 @@ const profileProjectSchema = new Schema({
 
 //possibly add usernames in future
 const profileSchema = new Schema({
+    _id: {
+        type: String,
+        required: false,
+    },
     firstname: {
         type: String,
         required: true,

@@ -16,6 +16,7 @@ router.route('/add').post((req, res) => {
     const technologies = req.body.technologies;
     const members = req.body.members;
     const image = req.body.image;
+    const _id = req.body._id;
 
     const newProject = new Project({
         projectname,
@@ -24,6 +25,7 @@ router.route('/add').post((req, res) => {
         technologies,
         members,
         image,
+        _id
     });
 
     newProject.save()

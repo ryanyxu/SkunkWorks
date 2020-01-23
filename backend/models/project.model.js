@@ -12,6 +12,10 @@ const technologySchema = new Schema({
 });
 
 const projectSchema = new Schema({
+    _id: {
+        type: String,
+        required: false,
+    },
     projectname: {
         type: String,
         required: true,
@@ -22,7 +26,6 @@ const projectSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        maxlength: 100,
     },
     longdescription: {
         type: String,

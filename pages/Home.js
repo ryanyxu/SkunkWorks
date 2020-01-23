@@ -93,7 +93,7 @@ const ProjectDisplay = () => {
             await Axios.get('http://localhost:8080'+'/projects/')
             .then(response => {
                 return response.data.map(project => new Object({ //possibly make project object later
-                        id: project._id.toString(),
+                        id: project._id,
                         name: project.projectname,
                         description: project.shortdescription,
                         image: project.image

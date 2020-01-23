@@ -10,6 +10,7 @@ router.route('/').get((req, res) => {
 
 //add a person
 router.route('/add').post((req, res) => {
+    const _id = req.body._id;
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const email = req.body.email;
@@ -17,6 +18,7 @@ router.route('/add').post((req, res) => {
     const image = req.body.image;
 
     const newProfile = new Profile({
+        _id,
         firstname,
         lastname,
         email,

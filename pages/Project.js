@@ -37,17 +37,20 @@ function Project() {
         setProject(
             await Axios.get('http://localhost:8080'+'/projects/' + router.query.id)
             .then(project => {
-                console.log('http://localhost:8080'+'/projects/' + router.query.id);
+                console.log(project.data.members)
                 return {
                     id: router.query.id,
                     name: project.data.projectname,
                     shortDescription: project.data.shortdescription,
                     longDescription: project.data.longdescription,
+                    technologies: project.data.technologies[0],
+                    /*
                     technologies: project.data.technologies.map(tech => {
                         var techName = tech.technology;
                         var techImage = tech.image;
                         return {name: techName, image: techImage};
                     }),
+                    */
                     members: project.data.members,
                 };
             })
@@ -168,7 +171,7 @@ const MoreInfo = (props) => {
                 <p className="project-info">{props.info}</p>
             </Col>
             <Col className="col-6">
-                <TechnologyDisplay technologies={props.tech}/>
+                <TempTechnologyDisplay technologies={props.tech}/>
             </Col>
         </Row>
     </>);
@@ -179,6 +182,7 @@ const TechnologyDisplay = (props) => {
     //renders individual technology card
     //in the future will want a large database of icons for every possible framework/technology
     //can possibly reuse code in tech, team, and project display and pass classname as parameters for styling
+
     const TechnologyCard = (props) => {
 
         return <div >
@@ -208,10 +212,20 @@ const TechnologyDisplay = (props) => {
     );
 }
 
+const TempTechnologyDisplay = (props) => {
+    return (
+        <div>
+            <Container className="technology-display">
+                <p className="project-category-header">Tech Stack</p>
+                <p className="project-info" >{props.technologies}</p>
+            </Container>
+        </div>
+    );
+}
+
 //displays project team
 const TeamDisplay = (props) => {
     //renders individual member card
-
     var idArr = props.team;
     const [members, setMembers] = useState([]);
 
