@@ -49,14 +49,13 @@ const Profile = () => {
         <>
             {
                 !profile ? <div>profile not found</div> :
-                <div>
+                <div className="color-change lead">
                     <ProfileIntro image={profile.image} 
                         name={profile.name}
                         email={profile.email}
                         about={profile.about}
                     />
                     <ProjectInvolvement projects={profile.projects}/>
-                    <Contact/>
                 </div>
             }
         </>
@@ -90,11 +89,11 @@ function ProjectInvolvement(props) {
         return (
             <Row className="project-involvement-card"
                 id={props.project.id + "-card"}>
-                    <Col className="col col-4">
+                    <Col className="col col-12 col-lg-4 project-involvement-image">
                         <CardImg top src={props.project.image}/>
                     </Col>
-                    <Col>
-                        <CardTitle>{props.project.projectname}</CardTitle>
+                    <Col className="col col-12 col-lg-8 ">
+                        <CardTitle className="project-involvement-title">{props.project.projectname}</CardTitle>
                         <CardText>Role: {props.project.role}</CardText>
                         <CardText>Accomplishments: {props.project.contribution}</CardText>
                         <Link href={"/Project?id=" + props.project._id}>
@@ -146,13 +145,15 @@ function ProjectInvolvement(props) {
     */
 
     return (
-        <div className="profile-padding project-involvement">
-            <Container>
-                <h1 className="project-involvement-heading">Projects</h1>
-                <Row>
-                    {projectCards}
-                </Row>
-            </Container>
+        <div className="color-change-light">
+            <div className="profile-padding">
+                <Container >
+                    <div className="profile-header">Projects</div>
+                    <Row>
+                        {projectCards}
+                    </Row>
+                </Container>
+            </div>
         </div>
     );
 }
@@ -161,7 +162,7 @@ function ProjectInvolvement(props) {
 const Contact = (props) => {
     return (
         <div className="profile-form profile-padding">
-            <h1 className="profile-form-header">Contact me</h1>
+            <h1 className="profile-header">Contact me</h1>
             <Form className="sign-up">
                 <FormGroup>
                 <Label for="exampleText">Name</Label>

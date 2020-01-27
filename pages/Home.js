@@ -127,6 +127,7 @@ const ProjectDisplay = () => {
     }
 
     //so people on other servers can see
+    /*
     var mockProject = (id) => {
         return {
             id: id,
@@ -135,6 +136,7 @@ const ProjectDisplay = () => {
             image: "https://www.netclipart.com/pp/m/179-1791305_1-6-meet-schedule-mark-your-calendar-icon.png",
         }
     }
+    */
 
     return (
         <div className="project-display">
@@ -147,32 +149,6 @@ const ProjectDisplay = () => {
                         </Col>);
                     })
                 }
-                <Col className="col-6 col-lg-4">
-                    <ProjectCard project={mockProject("test1")}/>
-                </Col>
-                <Col className="col-6 col-lg-4">
-                    <ProjectCard project={mockProject("test2")}/>
-                </Col>
-
-                <Col className="col-6 col-lg-4">
-                    <ProjectCard project={mockProject("test3")}/>
-                </Col>
-                <Col className="col-6 col-lg-4">
-                    <ProjectCard project={mockProject("test4")}/>
-                </Col>
-                <Col className="col-6 col-lg-4">
-                    <ProjectCard project={mockProject("test5")}/>
-                </Col>
-
-                <Col className="col-6 col-lg-4">
-                    <ProjectCard project={mockProject("test3")}/>
-                </Col>
-                <Col className="col-6 col-lg-4">
-                    <ProjectCard project={mockProject("test4")}/>
-                </Col>
-                <Col className="col-6 col-lg-4">
-                    <ProjectCard project={mockProject("test5")}/>
-                </Col>
             </Row>
         </div>
     );

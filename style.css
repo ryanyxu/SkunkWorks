@@ -393,7 +393,6 @@ ul.nav.nav-tabs {
     padding-right: 25vmin;
 }
 .profile-intro {
-    background-color: rgb(129, 139, 182);
     padding-bottom: 3vh;
 }
 .profile-picture {
@@ -403,23 +402,26 @@ ul.nav.nav-tabs {
 .profile-description {
     color: white;
     padding: 2vmin;
-}
-.project-involvement {
-    background-color: rgb(233, 236, 250);
-    padding-top: 1vh;
+    font-size: 2.5vmin;
 }
 .project-involvement-card {
-    
     margin-top: 2vh;
     margin-left: 0%;
     margin-right: 0%;
     margin-bottom: 2vh;
     opacity: .90;
     transition: all .7s;
+    font-size: 2vmin;
 }
-.project-involvement-heading {
+.project-involvement-image {
+    width: 100%;
+}
+.project-involvement-title {
+    font-size: 2.7vmin;
+}
+.profile-header {
     text-align: center;
-    color: rgb(129, 139, 182);
+    font-size: 3.5vmin;
 }
 
 .profile-form {
@@ -427,10 +429,11 @@ ul.nav.nav-tabs {
     color: rgb(233, 236, 250);
     padding-bottom: 4vh;
     padding-top: 1vh;
+    font-size: 1.9vmin;
 }
-
-.profile-form-header {
-    text-align: center;
+/*this is wrong */
+.profile-form > button {
+    font-size: 3.5vmin;
 }
 
 .profile-form-submit {
