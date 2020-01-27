@@ -273,7 +273,6 @@ const TeamDisplay = (props) => {
                             </Row>
                             <strong>{member.firstname + " " + member.lastname}</strong>
                             <div>Role: {member.role}</div>
-                            <div>About me: </div>
                             <Link href={"/Profile?id=" + member.id}>
                                 <Button size="sm" >View Profile</Button>
                             </Link>

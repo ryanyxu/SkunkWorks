@@ -98,7 +98,7 @@ body{
     left:0;
     right:0;
     z-index:-1; /* needed to keep in the background */
-    background: url("https://upload.wikimedia.org/wikipedia/commons/a/ab/Volen_Center_for_Complex_Systems%2C_Brandeis_University%2C_Waltham_MA.jpg");
+    background: url("https://lh3.googleusercontent.com/SFLhUirp9YWj6sqFnQa6vJziITx3uHuSAI90LhhVT5TV9klNuWKLpDae9YVLcSmHZzrAllrZK4Vd7tUvifDmIHqPOOdeOkAKlEXhesQ_Ik2s-ScUWJkmQR6BsCfkHj9Biv-vUG27O4n9b94TKxDo3HEOvbS2eSlD_SXXg3sSWTPyobu650vWk8cyqZzcckDpyOOkwFK9bQQp4Nb8Ce79MzpZ73uILR0GU-4NUKO6EqXCOba6zJIS6uFKneDr4SViZcNjqTFwxEg8-RUuxKiccVelH2P3lV2Q9Ok9sTviglDFTcTs7Puc636YUJv18Sx6KixH9U_2CF4yRfLObl79-QQF-xmsL4bev_lZ831OGQygUQvyEIJ0tLMLI_wIvz_EchBZJ4Axwfr7F1Hri70s3l-j0K0H4_jAhu6Mxw4L1o_vF63CFga3bCPB1m0r-yB38t2h6lz6VEvqsYH8XP8p40JllQ7YTiQvnuUMu0A3U0uqwurXzq_nnDE8u1y_u68Tp7Kpz5ifuB_jNzvCznXa2bfF3MplSZhskFzqduf0BJf2FO-x0Kh5JdlxChuOsrO8SrSUitJYqBbjLQJeibscZVTvOtL7lRDkvc6hfIGq8ewO0V-cJ-ZLB-pxid7Fc-dxyb_38hNByictbRXAYCbUk3pl582X3ZsZfveVYlTNTOf-7c9nhxyeQ3ASsEDP9Tbd5F7vEhODZDZsZfBpUZFuy3gy9wKn5wjk0QQQLiz7xb62Lw=w2172-h1628-no");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -389,36 +389,34 @@ ul.nav.nav-tabs {
 
 /* profile stuff */
 .profile-padding {
-    padding-left: 20vh;
-    padding-right: 20vh;
+    padding-left: 25vmin;
+    padding-right: 25vmin;
 }
 .profile-intro {
     background-color: rgb(129, 139, 182);
     padding-bottom: 3vh;
 }
 .profile-picture {
-    width: 30vh;
-    height: auto;
-    overflow-y: hidden;
+    width: 100%;
+    max-width: 35vmin;
 }
 .profile-description {
     color: white;
-    padding: 2rem;
+    padding: 2vmin;
 }
 .project-involvement {
     background-color: rgb(233, 236, 250);
     padding-top: 1vh;
 }
 .project-involvement-card {
+    
     margin-top: 2vh;
     margin-left: 0%;
     margin-right: 0%;
     margin-bottom: 2vh;
     opacity: .90;
     transition: all .7s;
-    max-height: 80vh;
 }
-
 .project-involvement-heading {
     text-align: center;
     color: rgb(129, 139, 182);

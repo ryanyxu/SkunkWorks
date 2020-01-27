@@ -76,7 +76,6 @@ const ProfileIntro = (props) => {
                     <div className="profile-description">
                         <p>{props.name}</p>
                         <p>{props.email}</p>
-                        <p>About Me: {props.about}</p>
                     </div>
                 </Col>
             </Row>
@@ -88,18 +87,32 @@ const ProfileIntro = (props) => {
 //possibly move image data away from profile on database and change to include useEffect and read from server
 function ProjectInvolvement(props) {
     function ProjectCard(props) {
-        const lift = () => {
-            let project = document.getElementById(props.project.id + "-card");
-            if (project){
-                project.classList.toggle("card-shadow");
-            }
-        }
+        return (
+            <Row className="project-involvement-card"
+                id={props.project.id + "-card"}>
+                    <Col className="col col-4">
+                        <CardImg top src={props.project.image}/>
+                    </Col>
+                    <Col>
+                        <CardTitle>{props.project.projectname}</CardTitle>
+                        <CardText>Role: {props.project.role}</CardText>
+                        <CardText>Accomplishments: {props.project.contribution}</CardText>
+                        <Link href={"/Project?id=" + props.project._id}>
+                            <Button onClick="">View Project</Button>
+                        </Link>
+                    </Col>
+            </Row>
+        );
 
-
+/*
         return (
             <div>
-                <Card className="project-involvement-card" id={props.project.id + "-card"} onMouseEnter={lift} onMouseLeave={lift}>
-                    <CardImg top width="100%" src={props.project.image} alt="Cannot find image"/>
+                <Card
+                    className="project-involvement-card"
+                    id={props.project.id + "-card"}
+                    onMouseEnter={lift} onMouseLeave={lift}
+                    >
+                    
                     <CardBody>
                     <CardTitle>{props.project.projectname}</CardTitle>
                     <CardText>Role: {props.project.role}</CardText>
@@ -111,12 +124,13 @@ function ProjectInvolvement(props) {
                 </Card>
             </div>
         );
+        */
     }
 
     var projectCards = [];
     props.projects.forEach(project => {
         projectCards.push(
-            <Col className="col-12 col-lg-4 col-md-6"><ProjectCard project={project}/></Col>
+            <ProjectCard project={project}/>
         );
     });
     /*
