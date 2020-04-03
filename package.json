@@ -20,7 +20,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "prod": "next export"
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "https://brandeisskunkworks.herokuapp.com:8080",
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "axios": "^0.19.0",

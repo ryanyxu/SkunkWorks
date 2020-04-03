@@ -74,11 +74,11 @@ const AddProjectForm = (props) => {
             membersArr[i].projects[0].image=projectInfo.image
 
             console.log(JSON.stringify(membersArr[i]))
-            Axios.post('http://localhost:8080'+'/profiles/add', membersArr[i])
+            Axios.post('/profiles/add', membersArr[i])
                 .then(response => console.log(response))
                 .catch(error => console.log(error))
         }
-        Axios.post('http://localhost:8080'+'/projects/add', projectInfo)
+        Axios.post('/projects/add', projectInfo)
             .then(response => console.log(response))
             .catch(error => console.log(error))
 
