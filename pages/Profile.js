@@ -32,7 +32,7 @@ const Profile = () => {
     }, [profile]);
 
     const getProfile = async () => {
-        let res = await Axios.get('http://localhost:8080'+'/profiles/' + router.query.id)
+        let res = await Axios.get('https://brandeisskunkworks.herokuapp.com'+'/profiles/' + router.query.id)
             .then(profile => {
                 let obj = {
                     name: profile.data.firstname + " " + profile.data.lastname,

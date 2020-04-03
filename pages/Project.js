@@ -35,7 +35,7 @@ function Project() {
     //get project from server
     const getProject = async () => {
         setProject(
-            await Axios.get('http://localhost:8080'+'/projects/' + router.query.id)
+            await Axios.get('https://brandeisskunkworks.herokuapp.com'+'/projects/' + router.query.id)
             .then(project => {
                 console.log(project.data.members)
                 return {
@@ -240,14 +240,14 @@ const TeamDisplay = (props) => {
     const getTeam = async () => {
         let arr = [...Array(idArr.length)];
         for (var i = 0; i < idArr.length; i++) {
-            arr[i] = await Axios.get('http://localhost:8080'+'/profiles/' + idArr[i])
+            arr[i] = await Axios.get('https://brandeisskunkworks.herokuapp.com'+'/profiles/' + idArr[i])
                 .then(async profile => {
                     return {
                         id: idArr[i],
                         firstname: profile.data.firstname,
                         lastname: profile.data.lastname,
                         image: profile.data.image,
-                        role: await Axios.get('http://localhost:8080'+'/profiles/' + idArr[i] + "/" + props.projId)
+                        role: await Axios.get('https://brandeisskunkworks.herokuapp.com'+'/profiles/' + idArr[i] + "/" + props.projId)
                             .then(project => {
                                 if (project.data) {
                                     return project.data.role;
@@ -300,7 +300,7 @@ const JoinForm = (props) => {
     const handleInfoChange = (e) => setInfo(e.target.value);
     const onSubmit = (e) => {
         e.preventDefault();
-        Axios.post('http://localhost:8080'+'responses' + idArr[i]) 
+        Axios.post('https://brandeisskunkworks.herokuapp.com'+'/responses' + idArr[i]) 
     }
     return (
         <div >
