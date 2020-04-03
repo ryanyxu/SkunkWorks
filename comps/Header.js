@@ -20,7 +20,17 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
+
+  return (
+    <div>
+    <Navbar className="nav" expand="md">
+      <NavbarBrand href="/">SkunkWorks</NavbarBrand>
+    </Navbar>
+  </div>
+);
+
   //fix bug where toggler is transparent
+  /*
   return (
       <div>
       <Navbar className="nav" expand="md">
@@ -42,5 +52,6 @@ const Header = () => {
       </Navbar>
     </div>
   );
+  */
 }
 export default Header;

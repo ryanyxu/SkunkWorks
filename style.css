@@ -62,12 +62,13 @@
     transition: all 1s;
 }
 
+/*change this later to accomodate for both profile and project */
 .color-change-light {
     animation: colorchange-light 20s infinite;
     -webkit-animation: colorchange-light 20s infinite; /* Chrome and Safari */
     flex-grow: 1;
     transition: all 1s;
-    height: 100%;
+    min-height: 100%;
 }
 
 .transparent {
@@ -354,12 +355,13 @@ ul.nav.nav-tabs {
 }
 
 /* be careful changing height here */
+/* old height was 65vh - i ignored myself */
 .tab-content {
     padding-top: 2%;
     padding-left: 20vw;
     padding-right: 20vw;
     overflow: scroll;
-    height: 65vh;
+    height: 67vh;
 }
 
 .project-member-photo {
@@ -439,4 +441,9 @@ ul.nav.nav-tabs {
 .profile-form-submit {
     background-color: rgb(233, 236, 250);
     color: rgb(129, 139, 182);
+}
+
+/* about page */
+.about {
+    background-color: white;
 }
